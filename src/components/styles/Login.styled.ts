@@ -88,6 +88,38 @@ export const StyledLogin = styled.div`
 
   footer > a {
     text-decoration: none;
+    font-size: 12px;
     color: #8a8d91;
+  }
+
+  @media (max-width: 900px) {
+    .main {
+      min-width: 300px;
+    }
+
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .welcome {
+      align-items: center;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      margin-bottom: 15px;
+    }
+
+    .statement {
+      min-width: auto;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .login-button {
+      width: 100%;
+    }
   }
 `;

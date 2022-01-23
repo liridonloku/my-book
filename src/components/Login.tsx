@@ -24,7 +24,7 @@ const Login = () => {
         </div>
       </div>
       <footer>
-        <a href="github.com/liridonloku" className="footer-text">
+        <a href="https://github.com/liridonloku" className="footer-text">
           liridonloku, 2022
         </a>
       </footer>
