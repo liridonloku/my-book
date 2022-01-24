@@ -21,6 +21,7 @@ const StyledHeader = styled.header`
       display: flex;
       align-items: center;
       padding: 0 5px;
+      color: #1977f2;
     }
 
     .search-bar {
@@ -44,10 +45,33 @@ const StyledHeader = styled.header`
 
   .middle {
     display: flex;
+    gap: 5px;
+
+    div {
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    div:hover {
+      background-color: #f0f2f5;
+    }
   }
 
   .right {
     display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .user {
+      display: flex;
+      gap: 5px;
+    }
+
+    .right-nav {
+      display: flex;
+      gap: 5px;
+    }
   }
 `;
 

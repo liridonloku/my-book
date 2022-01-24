@@ -28,19 +28,21 @@ const Header = (props: Props) => {
             <div className="imag">
               <img src="#" alt="profile" />
             </div>
-            <div className="name">Name Name</div>
+            <div className="name">Name</div>
           </div>
-          <div className="menu">
-            <h3>Menu</h3>
-          </div>
-          <div className="messages">
-            <h3>Msg</h3>
-          </div>
-          <div className="notifications">
-            <h3>Ntf</h3>
-          </div>
-          <div className="settings">
-            <h3>Set</h3>
+          <div className="right-nav">
+            <div className="menu">
+              <h3>Menu</h3>
+            </div>
+            <div className="messages">
+              <h3>Msg</h3>
+            </div>
+            <div className="notifications">
+              <h3>Ntf</h3>
+            </div>
+            <div className="settings">
+              <h3>Set</h3>
+            </div>
           </div>
         </div>
       </div>
