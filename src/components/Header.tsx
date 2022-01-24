@@ -1,5 +1,12 @@
 import React from "react";
 import StyledHeader from "./styles/Header.styled";
+import { Home } from "@styled-icons/material/Home";
+import { People } from "@styled-icons/material/People";
+import { Apps } from "@styled-icons/material/Apps";
+import { Inbox } from "@styled-icons/material/Inbox";
+import { Notifications } from "@styled-icons/material/Notifications";
+import { ArrowDropDown } from "@styled-icons/material/ArrowDropDown";
+import profile from "../images/profile.jpg";
 
 type Props = {};
 
@@ -17,31 +24,43 @@ const Header = (props: Props) => {
         </div>
         <div className="middle">
           <div className="home">
-            <h3>Home</h3>
+            <h3>
+              <Home size={24} />
+            </h3>
           </div>
           <div className="people">
-            <h3>People</h3>
+            <h3>
+              <People size={24} />
+            </h3>
           </div>
         </div>
         <div className="right">
           <div className="user">
-            <div className="imag">
-              <img src="#" alt="profile" />
+            <div className="image">
+              <img src={profile} alt="profile" />
             </div>
             <div className="name">Name</div>
           </div>
           <div className="right-nav">
             <div className="menu">
-              <h3>Menu</h3>
+              <h3>
+                <Apps size={24} />
+              </h3>
             </div>
             <div className="messages">
-              <h3>Msg</h3>
+              <h3>
+                <Inbox size={24} />
+              </h3>
             </div>
             <div className="notifications">
-              <h3>Ntf</h3>
+              <h3>
+                <Notifications size={24} />
+              </h3>
             </div>
             <div className="settings">
-              <h3>Set</h3>
+              <h3>
+                <ArrowDropDown size={24} />
+              </h3>
             </div>
           </div>
         </div>

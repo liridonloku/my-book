@@ -48,9 +48,13 @@ const StyledHeader = styled.header`
     gap: 5px;
 
     div {
-      padding: 10px;
+      padding: 10px 30px;
       border-radius: 10px;
       cursor: pointer;
+
+      h3 {
+        color: #385898;
+      }
     }
 
     div:hover {
@@ -64,13 +68,49 @@ const StyledHeader = styled.header`
     gap: 5px;
 
     .user {
+      border-radius: 10px;
+      padding: 0 3px;
       display: flex;
       gap: 5px;
+
+      :hover {
+        background-color: #e4e6eb;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .image {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+      }
+
+      img {
+        border-radius: 50%;
+        max-width: 95%;
+        max-height: 95%;
+        object-fit: cover;
+      }
     }
 
     .right-nav {
       display: flex;
-      gap: 5px;
+      gap: 7px;
+
+      div {
+        cursor: pointer;
+        padding: 7px;
+        border-radius: 50%;
+        background-color: #e4e6eb;
+      }
+
+      div:hover {
+        background-color: #d0d3dc;
+      }
     }
   }
 `;
