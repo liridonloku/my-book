@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
-  width: 100%;
+  width: fit-content;
   padding: 3px 5px;
   background-color: #fff;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
