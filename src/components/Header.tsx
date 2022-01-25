@@ -8,7 +8,9 @@ import { Notifications } from "@styled-icons/material/Notifications";
 import { ArrowDropDown } from "@styled-icons/material/ArrowDropDown";
 import profile from "../images/profile.jpg";
 
-type Props = {};
+type Props = {
+  user?: {};
+};
 
 const Header = (props: Props) => {
   return (
@@ -25,12 +27,12 @@ const Header = (props: Props) => {
         <div className="middle">
           <div className="home">
             <h3>
-              <Home size={24} />
+              <Home size={24} data-testid="home" />
             </h3>
           </div>
           <div className="people">
             <h3>
-              <People size={24} />
+              <People size={24} data-testid="people" />
             </h3>
           </div>
         </div>

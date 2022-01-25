@@ -4,7 +4,7 @@ const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 2px 5px;
+  padding: 3px 5px;
   background-color: #fff;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 
@@ -19,6 +19,7 @@ const StyledHeader = styled.header`
 
     .icon {
       display: flex;
+      cursor: pointer;
       align-items: center;
       padding: 0 5px;
       color: #1977f2;

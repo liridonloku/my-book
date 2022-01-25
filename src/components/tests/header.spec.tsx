@@ -7,18 +7,14 @@ describe("Header", () => {
   });
 
   it("Renders the App Icon", () => {
-    expect(screen.getByText(/M/i)).toBeInTheDocument();
+    expect(screen.getByText(/M/)).toBeInTheDocument();
   });
 
   it("Renders the home button", () => {
-    expect(screen.getByText(/Home/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/home/i)).toBeInTheDocument();
   });
 
   it("Renders the People button", () => {
-    expect(screen.getByText(/People/i)).toBeInTheDocument();
-  });
-
-  it("Renders the People button", () => {
-    expect(screen.getByText(/People/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/people/i)).toBeInTheDocument();
   });
 });
