@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledHeader = styled.header`
   position: sticky;
   top: 0;
+  min-width: 100vw;
   width: fit-content;
   padding: 3px 5px;
   background-color: #fff;
