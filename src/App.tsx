@@ -1,13 +1,16 @@
 import React from "react";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Login />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Header />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
