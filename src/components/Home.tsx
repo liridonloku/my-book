@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Header from "./Header";
+import NewPost from "./NewPost";
 import { StyledHome } from "./styles/Home.styled";
 
 type Props = {};
@@ -14,7 +15,9 @@ const Home = (props: Props) => {
       <Header />
       <StyledHome>
         <div className="left">Left</div>
-        <div className="main">Middle</div>
+        <div className="main">
+          <NewPost />
+        </div>
         <div className="right">Right</div>
       </StyledHome>
     </Fragment>

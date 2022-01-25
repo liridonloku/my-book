@@ -6,4 +6,9 @@ export const StyledHome = styled.div`
   justify-content: space-between;
   background-color: #f0f2f5;
   min-height: calc(100vh - 62px);
+
+  .main {
+    width: 50%;
+    min-width: 400px;
+  }
 `;
