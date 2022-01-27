@@ -8,11 +8,11 @@ import { Notifications } from "@styled-icons/material/Notifications";
 import { ArrowDropDown } from "@styled-icons/material/ArrowDropDown";
 import profile from "../images/profile.jpg";
 
-type Props = {
+interface Props {
   user?: {};
-};
+}
 
-const Header = (props: Props) => {
+const Header: React.FC<Props> = () => {
   return (
     <StyledHeader>
       <div className="container">

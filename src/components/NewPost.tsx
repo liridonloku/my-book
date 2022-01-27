@@ -17,15 +17,15 @@ const NewPost = (props: Props) => {
       </div>
       <div className="separator"></div>
       <div className="bottom">
-        <div className="video-post" data-testid="live-video">
+        <div className="video-post">
           <Videocam size={24} color="red" />
           <p>Live Video</p>
         </div>
-        <div className="photo-post" data-testid="photo">
+        <div className="photo-post">
           <Photo size={24} color="green" />
           <p>Photo</p>
         </div>
-        <div className="feeling-post" data-testid="feeling">
+        <div className="feeling-post">
           <EmojiEmotions size={24} color="orange" />
           <p>Feeling</p>
         </div>

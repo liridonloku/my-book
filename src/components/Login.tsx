@@ -1,7 +1,9 @@
 import React from "react";
 import { StyledLogin } from "./styles/Login.styled";
 
-const Login = () => {
+interface Props {}
+
+const Login: React.FC<Props> = () => {
   return (
     <StyledLogin>
       <div className="main">

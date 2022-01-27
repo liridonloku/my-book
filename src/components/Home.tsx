@@ -3,13 +3,9 @@ import Header from "./Header";
 import NewPost from "./NewPost";
 import { StyledHome } from "./styles/Home.styled";
 
-type Props = {};
-let array: string[] = [];
-for (let i = 0; i < 100; i++) {
-  array.push(`Number ${i}`);
-}
+interface Props {}
 
-const Home = (props: Props) => {
+const Home: React.FC<Props> = () => {
   return (
     <Fragment>
       <Header />
