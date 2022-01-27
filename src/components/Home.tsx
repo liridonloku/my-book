@@ -15,7 +15,7 @@ const Home = (props: Props) => {
       <Header />
       <StyledHome>
         <div className="left">Left</div>
-        <div className="main">
+        <div className="main" data-testid="main">
           <NewPost />
         </div>
         <div className="right">Right</div>
