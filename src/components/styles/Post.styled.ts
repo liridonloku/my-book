@@ -76,7 +76,7 @@ const StyledPost = styled.div`
     display: flex;
     justify-content: center;
     img {
-      max-width: 100%;
+      width: 100%;
       max-height: 600px;
       object-fit: contain;
     }
