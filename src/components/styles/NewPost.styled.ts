@@ -41,6 +41,7 @@ export const StyledNewPost = styled.div`
       padding: 8px 15px;
       display: flex;
       align-items: center;
+      font-size: 20px;
       cursor: pointer;
 
       :hover {

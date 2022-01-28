@@ -8,6 +8,7 @@ export const StyledHome = styled.div`
   min-height: calc(100vh - 62px);
 
   .main {
+    max-width: 680px;
     width: 50%;
     min-width: 400px;
   }
