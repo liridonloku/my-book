@@ -55,7 +55,7 @@ const StyledHeader = styled.header`
       cursor: pointer;
 
       h3 {
-        color: #385898;
+        color: #65676b;
       }
     }
 

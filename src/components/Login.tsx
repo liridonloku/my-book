@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledLogin } from "./styles/Login.styled";
+import StyledLogin from "./styles/Login.styled";
 
 interface Props {}
 

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const StyledNewPost = styled.div`
+const StyledNewPost = styled.div`
   background-color: white;
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,13 +25,13 @@ export const StyledNewPost = styled.div`
       justify-content: center;
       align-items: center;
       cursor: pointer;
-    }
 
-    img {
-      border-radius: 50%;
-      max-width: 95%;
-      max-height: 95%;
-      object-fit: cover;
+      img {
+        border-radius: 50%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
     }
 
     .form {
@@ -80,3 +81,5 @@ export const StyledNewPost = styled.div`
     }
   }
 `;
+
+export default StyledNewPost;

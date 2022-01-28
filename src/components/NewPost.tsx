@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledNewPost } from "./styles/NewPost.styled";
+import StyledNewPost from "./styles/NewPost.styled";
 import image from "../images/profile.jpg";
 import { Videocam, Photo, EmojiEmotions } from "styled-icons/material";
 

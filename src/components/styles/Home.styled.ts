@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledHome = styled.div`
+const StyledHome = styled.div`
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -13,3 +13,5 @@ export const StyledHome = styled.div`
     min-width: 400px;
   }
 `;
+
+export default StyledHome;

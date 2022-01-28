@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledLogin = styled.div`
+const StyledLogin = styled.div`
   .main {
     background-color: #f0f2f5;
     min-width: 500px;
@@ -123,3 +123,5 @@ export const StyledLogin = styled.div`
     }
   }
 `;
+
+export default StyledLogin;
