@@ -11,16 +11,20 @@ const Post: React.FC<Props> = () => {
       <div className="head">
         <div className="left">
           <div className="image">
-            <img src={image} alt="user" />
+            <img src={image} alt="user" data-testid="user-image" />
           </div>
           <div className="meta-data">
-            <p className="user-name">User Name</p>
-            <p className="post-date">Date</p>
+            <p className="user-name" data-testid="user-name">
+              User Name
+            </p>
+            <p className="post-date" data-testid="post-date">
+              Date
+            </p>
           </div>
         </div>
         <div className="right">
           <div className="button">
-            <h3>
+            <h3 data-testid="more-button">
               <MoreHoriz size={24} />
             </h3>
           </div>
@@ -34,23 +38,23 @@ const Post: React.FC<Props> = () => {
       </div>
       <div className="stats">
         <div className="likes">
-          <p className="like-icon">
+          <p className="like-icon" data-testid="like-icon">
             <ThumbUp size={12} color="white" />
           </p>
-          <p>0</p>
+          <p data-testid="likes">0</p>
         </div>
         <div className="comments">
-          <p>11 Comments</p>
+          <p data-testid="comments">11 Comments</p>
         </div>
       </div>
       <div className="buttons">
-        <div className="like">
+        <div className="like" data-testid="like-button">
           <h3>
             <ThumbUp size={16} />
           </h3>
           <h3>Like</h3>
         </div>
-        <div className="comment">
+        <div className="comment" data-testid="comment-button">
           <h3>
             <Comment size={16} />
           </h3>

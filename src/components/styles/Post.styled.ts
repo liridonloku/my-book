@@ -99,7 +99,7 @@ const StyledPost = styled.div`
       cursor: default;
 
       .like-icon {
-        padding: 5px;
+        padding: 3px;
         border-radius: 50%;
         background-color: #1977f2;
         display: flex;
