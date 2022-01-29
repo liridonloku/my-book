@@ -28,7 +28,7 @@ const StyledHeader = styled.header`
 
     .search-bar {
       background-color: #f0f2f5;
-      border-radius: 30px;
+      border-radius: 20px;
       padding: 8px 10px;
       display: flex;
       align-items: center;

@@ -2,6 +2,7 @@ import React from "react";
 import image from "../images/profile.jpg";
 import { MoreHoriz, ThumbUp, Comment } from "styled-icons/material";
 import StyledPost from "./styles/Post.styled";
+import CommentSection from "./CommentSection";
 
 interface Props {}
 
@@ -61,7 +62,7 @@ const Post: React.FC<Props> = () => {
           <h3>Comment</h3>
         </div>
       </div>
-      <>{/*Comments section*/}</>
+      <CommentSection />
     </StyledPost>
   );
 };
