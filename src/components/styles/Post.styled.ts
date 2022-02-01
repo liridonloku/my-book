@@ -4,6 +4,7 @@ const StyledPost = styled.div`
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
 
   .head {
     padding: 10px;
@@ -110,6 +111,10 @@ const StyledPost = styled.div`
 
     .comments {
       cursor: pointer;
+
+      :hover {
+        text-decoration: underline;
+      }
     }
   }
 
