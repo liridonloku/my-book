@@ -24,6 +24,7 @@ const CommentBox: React.FC<Props> = () => {
         <textarea
           ref={textRef}
           className="comment-content"
+          rows={1}
           placeholder="Write a comment.."
           onChange={onChange}
           value={commentValue}
