@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledCommentBox = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 
   .image {
     flex-shrink: 0;
@@ -10,7 +11,7 @@ const StyledCommentBox = styled.div`
     width: 38px;
     height: 38px;
     align-self: flex-start;
-    padding-top: 1px;
+    margin-top: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
