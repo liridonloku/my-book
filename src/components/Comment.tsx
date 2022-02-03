@@ -8,16 +8,24 @@ const Comment: React.FC<Props> = () => {
   return (
     <StyledComment>
       <div className="image">
-        <img src={image} alt="profile" />
+        <img src={image} alt="profile" data-testid="profile-pic" />
       </div>
       <div className="comment">
         <div className="comment-content">
-          <p className="user-name">User Name</p>
-          <p className="comment-text">This is a comment...</p>
+          <p className="user-name" data-testid="user-name">
+            User Name
+          </p>
+          <p className="comment-text" data-testid="comment-text">
+            This is a comment...
+          </p>
         </div>
         <div className="comment-actions">
-          <p className="like">Like</p>
-          <p className="date">Date</p>
+          <p className="like" data-testid="like-button">
+            Like
+          </p>
+          <p className="date" data-testid="date-posted">
+            Date
+          </p>
         </div>
       </div>
     </StyledComment>
