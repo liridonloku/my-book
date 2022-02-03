@@ -10,8 +10,6 @@ const CommentSection: React.FC<Props> = () => {
     <StyledCommentSection>
       <CommentBox />
       <Comment />
-      <Comment />
-      <Comment />
     </StyledCommentSection>
   );
 };

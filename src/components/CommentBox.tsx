@@ -18,7 +18,7 @@ const CommentBox: React.FC<Props> = () => {
   return (
     <StyledCommentBox>
       <div className="image">
-        <img src={image} alt="" />
+        <img src={image} alt="" data-testid="profile-pic" />
       </div>
       <div className="comment-input">
         <textarea
@@ -28,8 +28,9 @@ const CommentBox: React.FC<Props> = () => {
           placeholder="Write a comment.."
           onChange={onChange}
           value={commentValue}
+          data-testid="input"
         ></textarea>
-        <div className="send-icon">
+        <div className="send-icon" data-testid="send-button">
           <Send size={24} color="#65676b" />
         </div>
       </div>
