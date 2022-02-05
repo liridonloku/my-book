@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import Header from "./Header";
-import NewPost from "./NewPost";
 import StyledHome from "./styles/Home.styled";
+import LeftSidebar from "./LeftSidebar";
+import NewPost from "./NewPost";
 import Post from "./Post";
 
 interface Props {}
@@ -11,7 +12,9 @@ const Home: React.FC<Props> = () => {
     <Fragment>
       <Header />
       <StyledHome>
-        <div className="left">Left</div>
+        <div className="left">
+          <LeftSidebar />
+        </div>
         <div className="main" data-testid="main">
           <NewPost />
           <Post />
