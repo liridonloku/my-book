@@ -16,6 +16,18 @@ const StyledHome = styled.div`
     width: 50%;
     min-width: 400px;
   }
+
+  @media (max-width: 480px) {
+    padding: 5px 0;
+    justify-content: center;
+
+    .main {
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      min-width: 320px;
+    }
+  }
 `;
 
 export default StyledHome;

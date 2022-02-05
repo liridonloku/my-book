@@ -114,6 +114,35 @@ const StyledHeader = styled.header`
       }
     }
   }
+
+  @media (max-width: 1260px) {
+    .left {
+      .search-bar {
+        display: none;
+      }
+    }
+
+    .right {
+      .user {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .middle {
+      div {
+        padding: 5px 15px;
+      }
+    }
+    .right {
+      .right-nav {
+        div {
+          padding: 3px;
+        }
+      }
+    }
+  }
 `;
 
 export default StyledHeader;
