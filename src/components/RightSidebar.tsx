@@ -13,8 +13,8 @@ const RightSidebar: React.FC<Props> = () => {
   return (
     <StyledRightSidebar>
       <p className="contacts-header">Contacts</p>
-      {array.map((element) => (
-        <ChatFriend />
+      {array.map((element, index) => (
+        <ChatFriend key={index} />
       ))}
     </StyledRightSidebar>
   );
