@@ -40,6 +40,7 @@ const Home: React.FC<Props> = () => {
         <div className="main" data-testid="main">
           <NewPost />
           <Post />
+          <Post />
         </div>
         {displayRightSidebar && (
           <div className="right">
