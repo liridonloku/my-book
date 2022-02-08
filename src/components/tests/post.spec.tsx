@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Post from "../Post";
 
-//user-iamge, user-name, post-date, more-button, like-icon, likes, comments, like-button, comment-button
-
 describe("Post Component", () => {
   beforeEach(() => {
     render(<Post />);

@@ -4,6 +4,7 @@ import StyledHome from "./styles/Home.styled";
 import LeftSidebar from "./LeftSidebar";
 import NewPost from "./NewPost";
 import Post from "./Post";
+import RightSidebar from "./RightSidebar";
 
 interface Props {}
 
@@ -40,7 +41,11 @@ const Home: React.FC<Props> = () => {
           <NewPost />
           <Post />
         </div>
-        {displayRightSidebar && <div className="right">Right</div>}
+        {displayRightSidebar && (
+          <div className="right">
+            <RightSidebar />
+          </div>
+        )}
       </StyledHome>
     </Fragment>
   );

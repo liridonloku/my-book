@@ -35,7 +35,7 @@ const Post: React.FC<Props> = () => {
         <p>Lorem Ipsum Dolor Sit Amet</p>
       </div>
       <div className="image">
-        <img src="http://placeimg.com/640/480/any" alt="post" />
+        <img src="http://placeimg.com/640/480/tech" alt="post" />
       </div>
       <div className="stats">
         <div className="likes">
