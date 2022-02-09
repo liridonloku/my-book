@@ -13,6 +13,7 @@ const Home: React.FC<Props> = () => {
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
     window.innerWidth < 1100 ? false : true
   );
+  //Right Sidebar will be displayed if screen is wider than 900px
   const [displayRightSidebar, setdisplayRightSidebar] = useState(
     window.innerWidth < 900 ? false : true
   );

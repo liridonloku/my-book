@@ -28,6 +28,10 @@ const StyledHome = styled.div`
       min-width: 320px;
     }
   }
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
 `;
 
 export default StyledHome;
