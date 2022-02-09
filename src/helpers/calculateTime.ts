@@ -10,13 +10,13 @@ const calculateTime = (postDate: Date, now: Date): string => {
   if (differenceInMinutes / (60 * 24 * 30) >= 1) {
     return `${Math.floor(differenceInMinutes / (60 * 24 * 30))} month${
       Math.floor(differenceInMinutes / (60 * 24 * 30)) === 1 ? "" : "s"
-    }  ago`;
+    } ago`;
   }
   // Weeks
   if (differenceInMinutes / (60 * 24 * 7) >= 1) {
     return `${Math.floor(differenceInMinutes / (60 * 24 * 7))} week${
       Math.floor(differenceInMinutes / (60 * 24 * 7)) === 1 ? "" : "s"
-    }  ago`;
+    } ago`;
   }
   // Days
   if (differenceInMinutes / (60 * 24) >= 1) {
@@ -28,13 +28,13 @@ const calculateTime = (postDate: Date, now: Date): string => {
   if (differenceInMinutes / 60 >= 1) {
     return `${Math.floor(differenceInMinutes / 60)} hour${
       Math.floor(differenceInMinutes / 60) === 1 ? "" : "s"
-    }  ago`;
+    } ago`;
   }
   // Minutes
   if (differenceInMinutes >= 1) {
-    return `${differenceInMinutes} minutes${
+    return `${differenceInMinutes} minute${
       differenceInMinutes === 1 ? "" : "s"
-    }  ago`;
+    } ago`;
   }
   // Now
   return "just now";
