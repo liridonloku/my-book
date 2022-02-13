@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import useLoginStatus from "../helpers/useLoginStatus";
 import Header from "./Header";
 import StyledHome from "./styles/Home.styled";
 import LeftSidebar from "./LeftSidebar";
@@ -6,9 +7,14 @@ import NewPost from "./NewPost";
 import Post from "./Post";
 import RightSidebar from "./RightSidebar";
 
-interface Props {}
+interface Props {
+  user?: object;
+}
 
-const Home: React.FC<Props> = () => {
+const Home: React.FC<Props> = (props) => {
+  //Redirect to login if there's no user prop
+  useLoginStatus(props.user);
+
   //Left Sidebar will be displayed if screen is wider than 1100px
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
     window.innerWidth < 1100 ? false : true
