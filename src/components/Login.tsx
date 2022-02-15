@@ -1,9 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import StyledLogin from "./styles/Login.styled";
+import { login, logout } from "../app/features/user/userSlice";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userLogin = () => {
+    dispatch(login({ name: "a", id: "1" }));
+    navigate("../", { replace: true });
+  };
   return (
     <StyledLogin>
       <div className="main">
@@ -17,7 +26,7 @@ const Login: React.FC<Props> = () => {
           <div className="login-form">
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
-            <button type="submit" className="login-button">
+            <button type="submit" className="login-button" onClick={userLogin}>
               Log In
             </button>
             <div className="separator"></div>
