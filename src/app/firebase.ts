@@ -4,10 +4,13 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAJeuK5NKsI9rR6d7sritZe_8cUPcJJg-U",
@@ -19,5 +22,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const firebase = initializeApp(firebaseConfig);
+const db = getFirestore(firebase);
+
+export const logInWithGoogle = async () => {
+  var provider = new GoogleAuthProvider();
+  await signInWithPopup(getAuth(), provider);
+};
+
+export const logOutUser = () => {
+  signOut(getAuth());
+};

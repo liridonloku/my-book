@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import useLoginStatus from "../helpers/useLoginStatus";
 import Header from "./Header";
 import StyledHome from "./styles/Home.styled";
@@ -6,16 +6,14 @@ import LeftSidebar from "./LeftSidebar";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import RightSidebar from "./RightSidebar";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
 interface Props {}
 
 const Home: React.FC<Props> = () => {
   //Redirect to login if there's no user prop
-  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
-  console.log(user);
   useLoginStatus(user);
 
   //Left Sidebar will be displayed if screen is wider than 1100px

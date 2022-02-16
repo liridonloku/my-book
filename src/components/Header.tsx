@@ -7,12 +7,16 @@ import { Inbox } from "@styled-icons/material/Inbox";
 import { Notifications } from "@styled-icons/material/Notifications";
 import { ArrowDropDown } from "@styled-icons/material/ArrowDropDown";
 import profile from "../images/profile.jpg";
+import { logout } from "../app/features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 interface Props {
   user?: {};
 }
 
 const Header: React.FC<Props> = () => {
+  //This needs to be moved to userSlice
+  const dispatch = useDispatch();
   return (
     <StyledHeader>
       <div className="container">
@@ -61,7 +65,7 @@ const Header: React.FC<Props> = () => {
             </div>
             <div className="settings">
               <h3>
-                <ArrowDropDown size={24} />
+                <ArrowDropDown size={24} onClick={() => dispatch(logout())} />
               </h3>
             </div>
           </div>
