@@ -1,11 +1,7 @@
-import {
-  ActionCreatorWithoutPayload,
-  ActionCreatorWithPayload,
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth } from "firebase/auth";
 import { logInWithGoogle, logOutUser } from "../../firebase";
+import { AppDispatch } from "../../store";
 
 const userSlice = createSlice({
   name: "user",
@@ -36,18 +32,13 @@ const userSlice = createSlice({
       state.email = "";
       state.photoUrl = "";
     },
-    test(state) {
-      console.log(state);
-    },
   },
 });
 
-export const { login, logout, test } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;
 
-export const googleLogIn = async (
-  dispatch: ActionCreatorWithPayload<{}> | ActionCreatorWithoutPayload
-) => {
+export const googleLogIn = async (dispatch: AppDispatch) => {
   await logInWithGoogle();
   let auth = getAuth();
   let name = auth.currentUser?.displayName || "";
@@ -55,7 +46,6 @@ export const googleLogIn = async (
   let email = auth.currentUser?.email || "";
   let photoUrl = auth.currentUser?.photoURL || "";
   dispatch(login({ name, id, email, photoUrl }));
-  dispatch(test());
 };
 
 export const logOut = () => {

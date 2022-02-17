@@ -9,7 +9,7 @@ import {
   ArrowDropDown,
 } from "@styled-icons/material";
 import profile from "../images/profile.jpg";
-import { logout } from "../app/features/user/userSlice";
+import { logout } from "../app/features/user/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 

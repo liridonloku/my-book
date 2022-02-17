@@ -66,7 +66,7 @@ const StyledLogin = styled.div`
     cursor: pointer;
     margin-top: 15px;
     color: #fff;
-    background-color: #1877f2;
+    background-color: #7b18f2;
     border: none;
     border-radius: 6px;
     font-size: 20px;

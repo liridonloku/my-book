@@ -12,15 +12,14 @@ import { RootState } from "../app/store";
 interface Props {}
 
 const Home: React.FC<Props> = () => {
-  //Redirect to login if there's no user prop
+  //Check user login status
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
 
-  //Left Sidebar will be displayed if screen is wider than 1100px
+  //Display sidebars based on screen width
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
     window.innerWidth < 1100 ? false : true
   );
-  //Right Sidebar will be displayed if screen is wider than 900px
   const [displayRightSidebar, setdisplayRightSidebar] = useState(
     window.innerWidth < 900 ? false : true
   );

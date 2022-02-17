@@ -1,26 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import StyledLogin from "./styles/Login.styled";
-import { googleLogIn } from "../app/features/user/userSlice";
+import { googleLogIn } from "../app/features/user/user";
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { AppDispatch, RootState } from "../app/store";
 import useLoginStatus from "../helpers/useLoginStatus";
-import {
-  ActionCreatorWithoutPayload,
-  ActionCreatorWithPayload,
-} from "@reduxjs/toolkit";
 
 interface Props {}
-interface Dispatch {
-  dispatch: ActionCreatorWithPayload<{}> | ActionCreatorWithoutPayload;
-}
 
 const Login: React.FC<Props> = () => {
-  //Redirect to login if there's no user prop
+  //Check login status
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
   //This part needs to be moved to userSlice
-  const dispatch: Dispatch["dispatch"] = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <StyledLogin>
@@ -32,14 +25,18 @@ const Login: React.FC<Props> = () => {
               Connect with friends and the world around you on MyBook.
             </h2>
           </div>
-          <div className="login-form">
+          <form
+            className="login-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
             <button type="submit" className="login-button">
               Log In
             </button>
             <button
-              type="submit"
               className="google-login-button"
               onClick={() => googleLogIn(dispatch)}
             >
@@ -47,7 +44,7 @@ const Login: React.FC<Props> = () => {
             </button>
             <div className="separator"></div>
             <button className="create-account">Create new Account</button>
-          </div>
+          </form>
         </div>
       </div>
       <footer>
