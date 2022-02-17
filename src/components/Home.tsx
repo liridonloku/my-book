@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useLoginStatus from "../helpers/useLoginStatus";
 import Header from "./Header";
 import StyledHome from "./styles/Home.styled";
@@ -23,7 +23,8 @@ const Home: React.FC<Props> = () => {
   const [displayRightSidebar, setdisplayRightSidebar] = useState(
     window.innerWidth < 900 ? false : true
   );
-  window.addEventListener("resize", () => {
+
+  const resize = () => {
     if (window.innerWidth < 900) {
       setdisplayLeftSidebar(false);
       setdisplayRightSidebar(false);
@@ -34,7 +35,14 @@ const Home: React.FC<Props> = () => {
       setdisplayLeftSidebar(true);
       setdisplayRightSidebar(true);
     }
+  };
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
   });
+
   return (
     <Fragment>
       <Header />
