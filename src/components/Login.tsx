@@ -6,18 +6,25 @@ import { login, googleLogIn } from "../app/features/user/userSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useLoginStatus from "../helpers/useLoginStatus";
+import {
+  ActionCreatorWithoutPayload,
+  ActionCreatorWithPayload,
+} from "@reduxjs/toolkit";
 
 interface Props {}
+interface Dispatch {
+  dispatch: ActionCreatorWithPayload<{}> | ActionCreatorWithoutPayload;
+}
 
 const Login: React.FC<Props> = () => {
   //Redirect to login if there's no user prop
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
   //This part needs to be moved to userSlice
-  const dispatch = useDispatch();
+  const dispatch: Dispatch["dispatch"] = useDispatch();
   const navigate = useNavigate();
   const userLogin = () => {
-    dispatch(login({ name: "a", id: "1" }));
+    dispatch(login({ name: "a", id: "1", email: "s", photoUrl: "a" }));
     navigate("../", { replace: true });
   };
 
