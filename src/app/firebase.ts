@@ -32,6 +32,6 @@ export const logInWithGoogle = async () => {
   await signInWithPopup(getAuth(), provider);
 };
 
-export const logOutUser = () => {
-  signOut(getAuth());
+export const logOutUser = async () => {
+  await signOut(getAuth());
 };

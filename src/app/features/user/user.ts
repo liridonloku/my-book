@@ -48,7 +48,7 @@ export const googleLogIn = async (dispatch: AppDispatch) => {
   dispatch(login({ name, id, email, photoUrl }));
 };
 
-export const logOut = () => {
-  logOutUser();
+export const logOut = async (dispatch: AppDispatch) => {
+  await logOutUser();
   logout();
 };

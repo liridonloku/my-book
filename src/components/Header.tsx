@@ -9,7 +9,7 @@ import {
   ArrowDropDown,
 } from "@styled-icons/material";
 import profile from "../images/profile.jpg";
-import { logout } from "../app/features/user/user";
+import { logOut } from "../app/features/user/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
@@ -71,7 +71,7 @@ const Header: React.FC<Props> = () => {
             </div>
             <div className="settings">
               <h3>
-                <ArrowDropDown size={24} onClick={() => dispatch(logout())} />
+                <ArrowDropDown size={24} onClick={() => logOut(dispatch)} />
               </h3>
             </div>
           </div>
