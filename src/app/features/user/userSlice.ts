@@ -36,10 +36,13 @@ const userSlice = createSlice({
       state.email = "";
       state.photoUrl = "";
     },
+    test(state) {
+      console.log(state);
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, test } = userSlice.actions;
 export default userSlice.reducer;
 
 export const googleLogIn = async (
@@ -52,6 +55,7 @@ export const googleLogIn = async (
   let email = auth.currentUser?.email || "";
   let photoUrl = auth.currentUser?.photoURL || "";
   dispatch(login({ name, id, email, photoUrl }));
+  dispatch(test());
 };
 
 export const logOut = () => {

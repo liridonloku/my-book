@@ -1,8 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import StyledLogin from "./styles/Login.styled";
-import { login, googleLogIn } from "../app/features/user/userSlice";
+import { googleLogIn } from "../app/features/user/userSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useLoginStatus from "../helpers/useLoginStatus";
@@ -22,11 +21,6 @@ const Login: React.FC<Props> = () => {
   useLoginStatus(user);
   //This part needs to be moved to userSlice
   const dispatch: Dispatch["dispatch"] = useDispatch();
-  const navigate = useNavigate();
-  const userLogin = () => {
-    dispatch(login({ name: "a", id: "1", email: "s", photoUrl: "a" }));
-    navigate("../", { replace: true });
-  };
 
   return (
     <StyledLogin>
@@ -41,18 +35,18 @@ const Login: React.FC<Props> = () => {
           <div className="login-form">
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
-            <button type="submit" className="login-button" onClick={userLogin}>
+            <button type="submit" className="login-button">
               Log In
             </button>
-            <div className="separator"></div>
             <button
-              className="create-account"
-              onClick={() => {
-                googleLogIn(dispatch);
-              }}
+              type="submit"
+              className="google-login-button"
+              onClick={() => googleLogIn(dispatch)}
             >
-              Create new Account
+              Log In with Google
             </button>
+            <div className="separator"></div>
+            <button className="create-account">Create new Account</button>
           </div>
         </div>
       </div>

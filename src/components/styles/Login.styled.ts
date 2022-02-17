@@ -60,6 +60,18 @@ const StyledLogin = styled.div`
     font-size: 20px;
     line-height: 48px;
     width: 300px;
+  }
+
+  .google-login-button {
+    cursor: pointer;
+    margin-top: 15px;
+    color: #fff;
+    background-color: #1877f2;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 48px;
+    width: 300px;
     margin-bottom: 20px;
   }
 

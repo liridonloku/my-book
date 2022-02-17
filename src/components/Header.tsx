@@ -1,20 +1,22 @@
 import React from "react";
 import StyledHeader from "./styles/Header.styled";
-import { Home } from "@styled-icons/material/Home";
-import { People } from "@styled-icons/material/People";
-import { Apps } from "@styled-icons/material/Apps";
-import { Inbox } from "@styled-icons/material/Inbox";
-import { Notifications } from "@styled-icons/material/Notifications";
-import { ArrowDropDown } from "@styled-icons/material/ArrowDropDown";
+import {
+  Home,
+  People,
+  Apps,
+  Inbox,
+  Notifications,
+  ArrowDropDown,
+} from "@styled-icons/material";
 import profile from "../images/profile.jpg";
 import { logout } from "../app/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
-interface Props {
-  user?: {};
-}
+interface Props {}
 
 const Header: React.FC<Props> = () => {
+  const user = useSelector((state: RootState) => state.user);
   //This needs to be moved to userSlice
   const dispatch = useDispatch();
   return (
@@ -43,9 +45,13 @@ const Header: React.FC<Props> = () => {
         <div className="right">
           <div className="user">
             <div className="image">
-              <img src={profile} alt="profile" />
+              <img
+                referrerPolicy="no-referrer"
+                src={user.photoUrl !== "" ? user.photoUrl : profile}
+                alt="profile"
+              />
             </div>
-            <div className="name">Name</div>
+            <div className="name">{user.name}</div>
           </div>
           <div className="right-nav">
             <div className="menu">
