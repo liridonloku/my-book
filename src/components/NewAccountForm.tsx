@@ -1,11 +1,12 @@
 import React from "react";
+import StyledNewAccountForm from "./styles/NewAccountForm.styled";
 import { X } from "styled-icons/bootstrap";
 
 interface Props {}
 
-const NewAccount: React.FC<Props> = () => {
+const NewAccountForm: React.FC<Props> = () => {
   return (
-    <div className="signup-modal">
+    <StyledNewAccountForm>
       <form>
         <div className="top">
           <h3 className="title">Sign Up</h3>
@@ -24,11 +25,13 @@ const NewAccount: React.FC<Props> = () => {
           <input type="password" name="password" />
           <label htmlFor="confirm-password">Confirm password</label>
           <input type="password" name="confirm-password" />
+        </div>
+        <div className="sign-up">
           <button type="submit">Sign Up</button>
         </div>
       </form>
-    </div>
+    </StyledNewAccountForm>
   );
 };
 
-export default NewAccount;
+export default NewAccountForm;

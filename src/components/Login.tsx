@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import NewAccountForm from "./NewAccountForm";
 import StyledLogin from "./styles/Login.styled";
 import { googleLogIn } from "../app/features/user/user";
 import { useSelector } from "react-redux";
@@ -12,7 +13,7 @@ const Login: React.FC<Props> = () => {
   //Check login status
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
-  //This part needs to be moved to userSlice
+
   const dispatch: AppDispatch = useDispatch();
 
   return (
@@ -52,6 +53,7 @@ const Login: React.FC<Props> = () => {
           liridonloku, 2022
         </a>
       </footer>
+      <NewAccountForm />
     </StyledLogin>
   );
 };
