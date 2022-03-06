@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import NewAccountForm from "./NewAccountForm";
 import StyledLogin from "./styles/Login.styled";
@@ -13,6 +13,12 @@ const Login: React.FC<Props> = () => {
   //Check login status
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
+
+  const [newAccountForm, setnewAccountForm] = useState(false);
+
+  const toggleNewAccountForm = () => {
+    setnewAccountForm(!newAccountForm);
+  };
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -44,7 +50,14 @@ const Login: React.FC<Props> = () => {
               Log In with Google
             </button>
             <div className="separator"></div>
-            <button className="create-account">Create new Account</button>
+            <button
+              className="create-account"
+              onClick={() => {
+                toggleNewAccountForm();
+              }}
+            >
+              Create new Account
+            </button>
           </form>
         </div>
       </div>
@@ -53,7 +66,9 @@ const Login: React.FC<Props> = () => {
           liridonloku, 2022
         </a>
       </footer>
-      <NewAccountForm />
+      {newAccountForm && (
+        <NewAccountForm toggleNewAccountForm={toggleNewAccountForm} />
+      )}
     </StyledLogin>
   );
 };

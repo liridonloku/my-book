@@ -2,15 +2,22 @@ import React from "react";
 import StyledNewAccountForm from "./styles/NewAccountForm.styled";
 import { X } from "styled-icons/bootstrap";
 
-interface Props {}
+interface Props {
+  toggleNewAccountForm: Function;
+}
 
-const NewAccountForm: React.FC<Props> = () => {
+const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
   return (
     <StyledNewAccountForm>
       <form>
         <div className="top">
           <h3 className="title">Sign Up</h3>
-          <div className="close-button">
+          <div
+            className="close-button"
+            onClick={() => {
+              toggleNewAccountForm();
+            }}
+          >
             <X size={24} />
           </div>
         </div>
