@@ -50,5 +50,5 @@ export const googleLogIn = async (dispatch: AppDispatch) => {
 
 export const logOut = async (dispatch: AppDispatch) => {
   await logOutUser();
-  logout();
+  dispatch(logout());
 };
