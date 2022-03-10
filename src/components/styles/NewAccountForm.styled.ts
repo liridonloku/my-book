@@ -13,6 +13,7 @@ const StyledNewAccountForm = styled.div`
 
   form {
     background-color: white;
+    width: 90vw;
     max-width: 500px;
     padding: 16px;
     border-radius: 8px;
@@ -27,6 +28,10 @@ const StyledNewAccountForm = styled.div`
 
     label {
       color: #606770;
+    }
+
+    .error-message {
+      color: red;
     }
 
     .sign-up {
