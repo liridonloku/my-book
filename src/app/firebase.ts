@@ -10,10 +10,12 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 
 import { getFirestore } from "firebase/firestore";
 import { login } from "./features/user/user";
+import { AppDispatch } from "./store";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAJeuK5NKsI9rR6d7sritZe_8cUPcJJg-U",
@@ -35,4 +37,37 @@ export const logInWithGoogle = async () => {
 
 export const logOutUser = async () => {
   await signOut(getAuth());
+};
+
+interface UserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export const createNewAccount = async (
+  { firstName, lastName, email, password, confirmPassword }: UserData,
+  dispatch: AppDispatch
+) => {
+  if (password === confirmPassword) {
+    const userCredential = await createUserWithEmailAndPassword(
+      getAuth(),
+      email,
+      password
+    );
+    let user = getAuth().currentUser;
+    if (user) {
+      await updateProfile(user, { displayName: `${firstName} ${lastName}` });
+      let name = user.displayName || "";
+      let id = user.uid || "";
+      let email = user.email || "";
+      let photoUrl = user.photoURL || "";
+      dispatch(login({ name, id, email, photoUrl }));
+    }
+    return userCredential;
+  } else {
+    console.error("Passwords don't match");
+  }
 };

@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import StyledNewAccountForm from "./styles/NewAccountForm.styled";
+import { createNewAccount } from "../app/firebase";
 import { X } from "styled-icons/bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 interface Props {
   toggleNewAccountForm: Function;
@@ -17,6 +20,8 @@ interface IFormInput {
 }
 
 const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,7 +32,12 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
   } = useForm<IFormInput>({
     criteriaMode: "all",
   });
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const userCredential = await createNewAccount(Object(data), dispatch);
+    if (userCredential) {
+      navigate("../", { replace: true });
+    }
+  };
 
   //Set focus on first name input field after the modal opens.
   useEffect(() => {
