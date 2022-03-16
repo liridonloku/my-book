@@ -12,7 +12,6 @@ import { RootState } from "../app/store";
 interface Props {}
 
 const Home: React.FC<Props> = () => {
-  //Check user login status
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
 

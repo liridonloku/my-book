@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import NewAccountForm from "./NewAccountForm";
 import StyledLogin from "./styles/Login.styled";
-import { googleLogIn } from "../app/features/user/user";
+import { logInWithGoogle } from "../app/firebase";
 import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../app/store";
+import { RootState } from "../app/store";
 import useLoginStatus from "../helpers/useLoginStatus";
 
 interface Props {}
@@ -19,8 +18,6 @@ const Login: React.FC<Props> = () => {
   const toggleNewAccountForm = () => {
     setnewAccountForm(!newAccountForm);
   };
-
-  const dispatch: AppDispatch = useDispatch();
 
   return (
     <StyledLogin>
@@ -45,7 +42,7 @@ const Login: React.FC<Props> = () => {
             </button>
             <button
               className="google-login-button"
-              onClick={() => googleLogIn(dispatch)}
+              onClick={() => logInWithGoogle()}
             >
               Log In with Google
             </button>

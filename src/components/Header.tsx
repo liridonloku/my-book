@@ -9,16 +9,15 @@ import {
   ArrowDropDown,
 } from "@styled-icons/material";
 import profile from "../images/profile.jpg";
-import { logOut } from "../app/features/user/user";
-import { useDispatch, useSelector } from "react-redux";
+import { logOutUser } from "../app/firebase";
+import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
-  //This needs to be moved to userSlice
-  const dispatch = useDispatch();
+
   return (
     <StyledHeader>
       <div className="container">
@@ -71,7 +70,7 @@ const Header: React.FC<Props> = () => {
             </div>
             <div className="settings">
               <h3>
-                <ArrowDropDown size={24} onClick={() => logOut(dispatch)} />
+                <ArrowDropDown size={24} onClick={() => logOutUser()} />
               </h3>
             </div>
           </div>
