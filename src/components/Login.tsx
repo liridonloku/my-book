@@ -31,7 +31,25 @@ const Login: React.FC<Props> = () => {
   });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    logInWithEmail(Object(data));
+    try {
+      await logInWithEmail(Object(data));
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          seterror("Wrong password");
+          break;
+        case "auth/user-not-found":
+          seterror("There is no account registered with this email.");
+          break;
+        case "auth/too-many-requests":
+          seterror(
+            "Access to this account has been disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
+          );
+          break;
+        default:
+          seterror("Unexpected error ocurred. Try again later.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -39,6 +57,8 @@ const Login: React.FC<Props> = () => {
   }, [setFocus]);
 
   const [newAccountForm, setnewAccountForm] = useState(false);
+
+  const [error, seterror] = useState("");
 
   const toggleNewAccountForm = () => {
     setnewAccountForm(!newAccountForm);
@@ -91,6 +111,11 @@ const Login: React.FC<Props> = () => {
                 onBlur: () => {
                   trigger("password");
                 },
+                onChange: () => {
+                  if (error !== "") {
+                    seterror("");
+                  }
+                },
               })}
             />
             <ErrorMessage
@@ -105,6 +130,7 @@ const Login: React.FC<Props> = () => {
                 ))
               }
             />
+            {error && <p className="error-message">{error}</p>}
             <button type="submit" className="login-button">
               Log In
             </button>

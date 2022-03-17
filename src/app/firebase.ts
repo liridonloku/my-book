@@ -78,5 +78,7 @@ export const createNewAccount = async (
 };
 
 export const logInWithEmail = async ({ email, password }: LoginData) => {
-  await signInWithEmailAndPassword(getAuth(), email, password);
+  return await signInWithEmailAndPassword(getAuth(), email, password);
 };
+
+//TODO: Handle password reset
