@@ -57,6 +57,16 @@ const StyledLogin = styled.div`
     color: red;
   }
 
+  .reset-password {
+    border: none;
+    background: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    align-self: flex-start;
+    padding-left: 5px;
+  }
+
   .login-button {
     cursor: pointer;
     margin-top: 15px;

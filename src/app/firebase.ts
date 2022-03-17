@@ -9,8 +9,8 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
   updateProfile,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 import { getFirestore } from "firebase/firestore";
@@ -29,6 +29,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 const db = getFirestore(firebase);
+const auth = getAuth();
 
 export const logInWithGoogle = async () => {
   var provider = new GoogleAuthProvider();
@@ -78,7 +79,10 @@ export const createNewAccount = async (
 };
 
 export const logInWithEmail = async ({ email, password }: LoginData) => {
-  return await signInWithEmailAndPassword(getAuth(), email, password);
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
 //TODO: Handle password reset
+export const sendResetPasswordLink = async (email: string) => {
+  await sendPasswordResetEmail(auth, email);
+};

@@ -7,6 +7,7 @@ import { logInWithEmail, logInWithGoogle } from "../app/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useLoginStatus from "../helpers/useLoginStatus";
+import ResetPasswordForm from "./ResetPasswordForm";
 
 interface Props {}
 
@@ -23,7 +24,6 @@ const Login: React.FC<Props> = () => {
   const {
     register,
     handleSubmit,
-    trigger,
     setFocus,
     formState: { errors },
   } = useForm<IFormInput>({
@@ -47,7 +47,7 @@ const Login: React.FC<Props> = () => {
           );
           break;
         default:
-          seterror("Unexpected error ocurred. Try again later.");
+          seterror("Unexpected error ocurred. Please try again later.");
       }
     }
   };
@@ -57,11 +57,16 @@ const Login: React.FC<Props> = () => {
   }, [setFocus]);
 
   const [newAccountForm, setnewAccountForm] = useState(false);
+  const [resetPasswordForm, setresetPasswordForm] = useState(false);
 
   const [error, seterror] = useState("");
 
   const toggleNewAccountForm = () => {
     setnewAccountForm(!newAccountForm);
+  };
+
+  const toggleResetPasswordForm = () => {
+    setresetPasswordForm(!resetPasswordForm);
   };
 
   return (
@@ -86,9 +91,6 @@ const Login: React.FC<Props> = () => {
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: "Please type a valid email",
                 },
-                onBlur: () => {
-                  trigger("email");
-                },
               })}
             />
             <ErrorMessage
@@ -108,9 +110,6 @@ const Login: React.FC<Props> = () => {
               placeholder="Password"
               {...register("password", {
                 required: "Please type your password",
-                onBlur: () => {
-                  trigger("password");
-                },
                 onChange: () => {
                   if (error !== "") {
                     seterror("");
@@ -131,10 +130,21 @@ const Login: React.FC<Props> = () => {
               }
             />
             {error && <p className="error-message">{error}</p>}
+            <button
+              type="button"
+              className="reset-password"
+              onClick={(e) => {
+                e.preventDefault();
+                toggleResetPasswordForm();
+              }}
+            >
+              Reset password
+            </button>
             <button type="submit" className="login-button">
               Log In
             </button>
             <button
+              type="button"
               className="google-login-button"
               onClick={() => logInWithGoogle()}
             >
@@ -142,8 +152,10 @@ const Login: React.FC<Props> = () => {
             </button>
             <div className="separator"></div>
             <button
+              type="button"
               className="create-account"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 toggleNewAccountForm();
               }}
             >
@@ -159,6 +171,9 @@ const Login: React.FC<Props> = () => {
       </footer>
       {newAccountForm && (
         <NewAccountForm toggleNewAccountForm={toggleNewAccountForm} />
+      )}
+      {resetPasswordForm && (
+        <ResetPasswordForm toggleResetPasswordForm={toggleResetPasswordForm} />
       )}
     </StyledLogin>
   );
