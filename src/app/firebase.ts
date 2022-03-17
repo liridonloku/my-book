@@ -39,7 +39,7 @@ export const logOutUser = async () => {
   await signOut(getAuth());
 };
 
-interface UserData {
+interface NewUserData {
   firstName: string;
   lastName: string;
   email: string;
@@ -47,8 +47,13 @@ interface UserData {
   confirmPassword: string;
 }
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 export const createNewAccount = async (
-  { firstName, lastName, email, password, confirmPassword }: UserData,
+  { firstName, lastName, email, password, confirmPassword }: NewUserData,
   dispatch: AppDispatch
 ) => {
   if (password === confirmPassword) {
@@ -70,4 +75,8 @@ export const createNewAccount = async (
   } else {
     console.error("Passwords don't match");
   }
+};
+
+export const logInWithEmail = async ({ email, password }: LoginData) => {
+  await signInWithEmailAndPassword(getAuth(), email, password);
 };

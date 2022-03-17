@@ -50,6 +50,12 @@ const StyledLogin = styled.div`
     border: 1px solid #dddfe2;
   }
 
+  .error-message {
+    align-self: flex-start;
+    padding-left: 5px;
+    color: red;
+  }
+
   .login-button {
     cursor: pointer;
     margin-top: 15px;
