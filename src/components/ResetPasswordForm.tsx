@@ -7,13 +7,17 @@ import { sendResetPasswordLink } from "../app/firebase";
 
 interface Props {
   toggleResetPasswordForm: Function;
+  toggleInformationBox: Function;
 }
 
 interface IFormInput {
   email: string;
 }
 
-const ResetPasswordForm: React.FC<Props> = ({ toggleResetPasswordForm }) => {
+const ResetPasswordForm: React.FC<Props> = ({
+  toggleResetPasswordForm,
+  toggleInformationBox,
+}) => {
   const {
     register,
     handleSubmit,
@@ -38,7 +42,10 @@ const ResetPasswordForm: React.FC<Props> = ({ toggleResetPasswordForm }) => {
       } else {
         seterrorMessage("Unexpected error. Please try again later.");
       }
+      return;
     }
+    toggleResetPasswordForm();
+    toggleInformationBox();
   };
 
   return (
@@ -58,6 +65,7 @@ const ResetPasswordForm: React.FC<Props> = ({ toggleResetPasswordForm }) => {
         <div className="information">
           <input
             type="email"
+            placeholder="email"
             {...register("email", {
               required: "Please type your email",
               pattern: {

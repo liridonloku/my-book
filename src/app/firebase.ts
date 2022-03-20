@@ -82,7 +82,6 @@ export const logInWithEmail = async ({ email, password }: LoginData) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
-//TODO: Handle password reset
 export const sendResetPasswordLink = async (email: string) => {
-  await sendPasswordResetEmail(auth, email);
+  return await sendPasswordResetEmail(auth, email);
 };

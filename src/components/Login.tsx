@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import NewAccountForm from "./NewAccountForm";
+import InformationBox from "./InformationBox";
 import StyledLogin from "./styles/Login.styled";
 import { logInWithEmail, logInWithGoogle } from "../app/firebase";
 import { useSelector } from "react-redux";
@@ -58,6 +59,7 @@ const Login: React.FC<Props> = () => {
 
   const [newAccountForm, setnewAccountForm] = useState(false);
   const [resetPasswordForm, setresetPasswordForm] = useState(false);
+  const [informationBox, setinformationBox] = useState(false);
 
   const [error, seterror] = useState("");
 
@@ -67,6 +69,10 @@ const Login: React.FC<Props> = () => {
 
   const toggleResetPasswordForm = () => {
     setresetPasswordForm(!resetPasswordForm);
+  };
+
+  const toggleInformationBox = () => {
+    setinformationBox(!informationBox);
   };
 
   return (
@@ -173,7 +179,13 @@ const Login: React.FC<Props> = () => {
         <NewAccountForm toggleNewAccountForm={toggleNewAccountForm} />
       )}
       {resetPasswordForm && (
-        <ResetPasswordForm toggleResetPasswordForm={toggleResetPasswordForm} />
+        <ResetPasswordForm
+          toggleResetPasswordForm={toggleResetPasswordForm}
+          toggleInformationBox={toggleInformationBox}
+        />
+      )}
+      {informationBox && (
+        <InformationBox toggleInformationBox={toggleInformationBox} />
       )}
     </StyledLogin>
   );
