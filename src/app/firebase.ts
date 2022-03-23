@@ -13,7 +13,14 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import { login } from "./features/user/user";
 import { AppDispatch } from "./store";
 // Your web app's Firebase configuration
@@ -31,13 +38,53 @@ const firebase = initializeApp(firebaseConfig);
 const db = getFirestore(firebase);
 const auth = getAuth();
 
+const addGoogleAccountPersonToDB = async () => {
+  const user = auth.currentUser;
+  try {
+    if (user) {
+      const querySnapshot = await getDocs(collection(db, "people"));
+      const people = querySnapshot.docs.map((person) => person.data());
+      if (people.some((person) => person.id === user.uid)) return;
+      let name = user.displayName || "";
+      let id = user.uid || "";
+      let email = user.email || "";
+      let photoUrl = user.photoURL || "";
+      addPersonToDB({ id, name, email, photoUrl });
+    }
+  } catch (error) {
+    console.log("Could not add user to database", error);
+  }
+};
+
 export const logInWithGoogle = async () => {
   var provider = new GoogleAuthProvider();
   await signInWithPopup(getAuth(), provider);
+  await addGoogleAccountPersonToDB();
 };
 
 export const logOutUser = async () => {
   await signOut(getAuth());
+};
+
+interface Person {
+  id: string;
+  name: string;
+  email: string;
+  photoUrl: string;
+}
+
+const addPersonToDB = async ({ id, name, email = "", photoUrl }: Person) => {
+  try {
+    await setDoc(doc(db, "people", id), {
+      id,
+      name,
+      email,
+      photoUrl,
+      friendList: [],
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 interface NewUserData {
@@ -46,11 +93,6 @@ interface NewUserData {
   email: string;
   password: string;
   confirmPassword: string;
-}
-
-interface LoginData {
-  email: string;
-  password: string;
 }
 
 export const createNewAccount = async (
@@ -70,13 +112,19 @@ export const createNewAccount = async (
       let id = user.uid || "";
       let email = user.email || "";
       let photoUrl = user.photoURL || "";
+      await addPersonToDB({ id, name, email, photoUrl });
       dispatch(login({ name, id, email, photoUrl }));
     }
     return userCredential;
   } else {
-    console.error("Passwords don't match");
+    return Error("Passwords don't match.");
   }
 };
+
+interface LoginData {
+  email: string;
+  password: string;
+}
 
 export const logInWithEmail = async ({ email, password }: LoginData) => {
   return await signInWithEmailAndPassword(auth, email, password);
