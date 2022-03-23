@@ -59,7 +59,7 @@ export const createNewAccount = async (
 ) => {
   if (password === confirmPassword) {
     const userCredential = await createUserWithEmailAndPassword(
-      getAuth(),
+      auth,
       email,
       password
     );

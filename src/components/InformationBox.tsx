@@ -23,7 +23,7 @@ const InformationBox: React.FC<Props> = ({ toggleInformationBox }) => {
             your password.
           </p>
         </div>
-        <div className="sign-up">
+        <div className="confirm">
           <button type="submit">Ok</button>
         </div>
       </form>

@@ -95,7 +95,7 @@ const ResetPasswordForm: React.FC<Props> = ({
           />
           {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
-        <div className="sign-up">
+        <div className="confirm">
           <button type="submit">Send password reset email</button>
         </div>
       </form>

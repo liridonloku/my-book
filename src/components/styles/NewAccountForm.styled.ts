@@ -34,7 +34,8 @@ const StyledNewAccountForm = styled.div`
       color: red;
     }
 
-    .sign-up {
+    .sign-up,
+    .confirm {
       display: flex;
       justify-content: center;
       align-items: center;

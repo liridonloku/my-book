@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import StyledNewAccountForm from "./styles/NewAccountForm.styled";
@@ -21,7 +21,11 @@ interface IFormInput {
 
 const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
   let navigate = useNavigate();
+
   let dispatch = useDispatch();
+
+  const [error, seterror] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -33,9 +37,19 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
     criteriaMode: "all",
   });
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const userCredential = await createNewAccount(Object(data), dispatch);
-    if (userCredential) {
-      navigate("../", { replace: true });
+    try {
+      const userCredential = await createNewAccount(Object(data), dispatch);
+      if (userCredential) {
+        navigate("../", { replace: true });
+      }
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        seterror(
+          "This email is already linked to an account. Please use another email."
+        );
+      } else {
+        seterror("Unexpected error ocurred. Please try again later.");
+      }
     }
   };
 
@@ -59,6 +73,11 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
           </div>
         </div>
         <div className="information">
+          {error && (
+            <p className="error-message" style={{ marginBottom: "10px" }}>
+              {error}
+            </p>
+          )}
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
