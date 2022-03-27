@@ -55,6 +55,10 @@ const StyledHeader = styled.header`
 
       h3 {
         color: #65676b;
+
+        a:visited {
+          color: #65676b;
+        }
       }
     }
 

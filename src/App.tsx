@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
+import People from "./components/People";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login, logout } from "./app/features/user/user";
 import { useDispatch } from "react-redux";
@@ -33,6 +34,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/people" element={<People />} />
       </Routes>
     </BrowserRouter>
   );

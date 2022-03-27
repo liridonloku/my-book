@@ -12,6 +12,7 @@ import profile from "../images/profile.jpg";
 import { logOutUser } from "../app/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -32,12 +33,16 @@ const Header: React.FC<Props> = () => {
         <div className="middle">
           <div className="home">
             <h3>
-              <Home size={24} data-testid="home" />
+              <Link to={"/"}>
+                <Home size={24} data-testid="home" />
+              </Link>
             </h3>
           </div>
           <div className="people">
             <h3>
-              <People size={24} data-testid="people" />
+              <Link to={"/people"}>
+                <People size={24} data-testid="people" />
+              </Link>
             </h3>
           </div>
         </div>
