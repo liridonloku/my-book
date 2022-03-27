@@ -6,10 +6,10 @@ const useLoginStatus = (user: { name: string; id: string }) => {
   let navigate = useNavigate();
   useEffect(() => {
     if ((!user || user.id === "") && location.pathname !== "/login") {
-      navigate("./login", { replace: true });
+      navigate("/login", { replace: true });
     }
     if (user.id !== "" && location.pathname === "/login") {
-      navigate("../", { replace: true });
+      navigate("/", { replace: true });
     }
   });
 };
