@@ -6,6 +6,7 @@ import People from "./components/People";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login, logout } from "./app/features/user/user";
 import { useDispatch } from "react-redux";
+import { getPeople } from "./app/firebase";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       let email = auth.currentUser?.email || "";
       let photoUrl = auth.currentUser?.photoURL || "";
       dispatch(login({ name, id, email, photoUrl }));
+      getPeople(dispatch);
     } else {
       dispatch(logout());
     }

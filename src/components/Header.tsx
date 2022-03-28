@@ -12,12 +12,13 @@ import profile from "../images/profile.jpg";
 import { logOutUser } from "../app/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
+  const location = useLocation();
 
   return (
     <StyledHeader>
@@ -31,17 +32,41 @@ const Header: React.FC<Props> = () => {
           </div>
         </div>
         <div className="middle">
-          <div className="home">
+          <div
+            className="home"
+            style={
+              location.pathname === "/"
+                ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
+                : {}
+            }
+          >
             <h3>
               <Link to={"/"}>
-                <Home size={24} data-testid="home" />
+                <Home
+                  size={24}
+                  data-testid="home"
+                  style={location.pathname === "/" ? { color: "#1977f2" } : {}}
+                />
               </Link>
             </h3>
           </div>
-          <div className="people">
+          <div
+            className="people"
+            style={
+              location.pathname === "/people"
+                ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
+                : {}
+            }
+          >
             <h3>
               <Link to={"/people"}>
-                <People size={24} data-testid="people" />
+                <People
+                  size={24}
+                  data-testid="people"
+                  style={
+                    location.pathname === "/people" ? { color: "#1977f2" } : {}
+                  }
+                />
               </Link>
             </h3>
           </div>

@@ -13,6 +13,8 @@ const People: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
 
+  const people = useSelector((state: RootState) => state.people.data);
+
   //Display sidebars based on screen width
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
     window.innerWidth < 1100 ? false : true
@@ -50,7 +52,9 @@ const People: React.FC<Props> = () => {
           </div>
         )}
         <div className="main" data-testid="main">
-          People
+          {people.map((person, index) => (
+            <p key={person.id}>{person.name}</p>
+          ))}
         </div>
         {displayRightSidebar && (
           <div className="right">

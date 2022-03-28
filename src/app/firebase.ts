@@ -21,6 +21,7 @@ import {
   getDocs,
   collection,
 } from "firebase/firestore";
+import { addPeople } from "./features/people/people";
 import { login } from "./features/user/user";
 import { AppDispatch } from "./store";
 // Your web app's Firebase configuration
@@ -132,4 +133,10 @@ export const logInWithEmail = async ({ email, password }: LoginData) => {
 
 export const sendResetPasswordLink = async (email: string) => {
   return await sendPasswordResetEmail(auth, email);
+};
+
+export const getPeople = async (dispatch: AppDispatch) => {
+  const querySnapshot = await getDocs(collection(db, "people"));
+  const people = querySnapshot.docs.map((person) => person.data());
+  dispatch(addPeople(Array.from(people)));
 };
