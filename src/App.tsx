@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
@@ -39,7 +39,10 @@ const App: React.FC = () => {
     onAuthStateChanged(getAuth(), authStateObserver);
   };
 
-  initFirebaseAuth();
+  useEffect(() => {
+    initFirebaseAuth();
+  });
+
   return (
     <BrowserRouter>
       <Routes>

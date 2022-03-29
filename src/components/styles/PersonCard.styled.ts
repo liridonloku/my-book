@@ -53,7 +53,7 @@ const StyledPersonCard = styled.div`
         }
 
         :active {
-          transform: scale(0.95);
+          transform: scale(0.97);
         }
       }
 
