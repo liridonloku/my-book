@@ -31,10 +31,14 @@ const StyledPersonCard = styled.div`
 
     .user-name {
       flex-grow: 1;
+
+      span {
+        cursor: pointer;
+      }
     }
 
     .action-button {
-      button {
+      .add-friend {
         cursor: pointer;
         padding: 10px 8px;
         color: #fff;
@@ -51,6 +55,13 @@ const StyledPersonCard = styled.div`
         :active {
           transform: scale(0.95);
         }
+      }
+
+      .friends {
+        padding: 10px 8px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
       }
     }
   }
