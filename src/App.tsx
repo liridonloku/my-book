@@ -5,12 +5,13 @@ import Home from "./components/Home";
 import People from "./components/People";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login, logout } from "./app/features/user/user";
+import { populateFriendsList } from "./app/features/friends/friends";
 import { useDispatch } from "react-redux";
 import { getPeople } from "./app/firebase";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const authStateObserver = (user: any) => {
+  const authStateObserver = async (user: any) => {
     if (user) {
       // User is signed in
       let auth = getAuth();
@@ -19,7 +20,15 @@ const App: React.FC = () => {
       let email = auth.currentUser?.email || "";
       let photoUrl = auth.currentUser?.photoURL || "";
       dispatch(login({ name, id, email, photoUrl }));
-      getPeople(dispatch);
+
+      //Populate people list
+      const people = await getPeople(dispatch);
+
+      //Populate friends list
+      const logedInUser = people.find((person) => person.id === id);
+      if (logedInUser) {
+        dispatch(populateFriendsList(logedInUser.friendList));
+      }
     } else {
       dispatch(logout());
     }

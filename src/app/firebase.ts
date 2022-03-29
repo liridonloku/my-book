@@ -139,4 +139,5 @@ export const getPeople = async (dispatch: AppDispatch) => {
   const querySnapshot = await getDocs(collection(db, "people"));
   const people = querySnapshot.docs.map((person) => person.data());
   dispatch(addPeople(Array.from(people)));
+  return people;
 };

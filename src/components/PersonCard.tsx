@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PersonCard: React.FC<Props> = ({ person }) => {
-  const user = useSelector((state: RootState) => state.user);
+  const friends = useSelector((state: RootState) => state.friends.data);
 
   return (
     <StyledPersonCard>
@@ -22,12 +22,12 @@ const PersonCard: React.FC<Props> = ({ person }) => {
           <span>{person.name}</span>
         </div>
         <div className="action-button">
-          {person.id !== user.id ? (
-            <button className="add-friend">Add Friend</button>
-          ) : (
+          {friends.includes(person.id) ? (
             <button className="friends" disabled>
               Friends
             </button>
+          ) : (
+            <button className="add-friend">Add Friend</button>
           )}
         </div>
       </div>
