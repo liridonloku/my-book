@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import NewAccountForm from "./NewAccountForm";
@@ -25,7 +25,6 @@ const Login: React.FC<Props> = () => {
   const {
     register,
     handleSubmit,
-    setFocus,
     formState: { errors },
   } = useForm<IFormInput>({
     criteriaMode: "all",
@@ -52,10 +51,6 @@ const Login: React.FC<Props> = () => {
       }
     }
   };
-
-  useEffect(() => {
-    setFocus("email");
-  }, [setFocus]);
 
   const [newAccountForm, setnewAccountForm] = useState(false);
   const [resetPasswordForm, setresetPasswordForm] = useState(false);
