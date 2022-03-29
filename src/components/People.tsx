@@ -5,6 +5,7 @@ import useLoginStatus from "../helpers/useLoginStatus";
 import Header from "./Header";
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
+import PersonCard from "./PersonCard";
 import StyledHome from "./styles/Home.styled";
 
 interface Props {}
@@ -53,7 +54,7 @@ const People: React.FC<Props> = () => {
         )}
         <div className="main" data-testid="main">
           {people.map((person, index) => (
-            <p key={person.id}>{person.name}</p>
+            <PersonCard key={person.id} person={person} />
           ))}
         </div>
         {displayRightSidebar && (

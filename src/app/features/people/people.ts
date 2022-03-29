@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Data {
+export interface Data {
   name: string;
   id: string;
   email: string;
@@ -17,7 +17,6 @@ const peopleSlice = createSlice({
   initialState: { data: [] } as SliceState,
   reducers: {
     addPeople(state, action) {
-      console.log("hey");
       state.data = action.payload;
     },
   },
