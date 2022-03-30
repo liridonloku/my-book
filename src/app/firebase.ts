@@ -25,6 +25,8 @@ import {
   deleteDoc,
   DocumentReference,
   DocumentData,
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
 import { login } from "./features/user/user";
@@ -193,5 +195,15 @@ export const cancelFriendRequest = async (
       ref = request.ref;
       deleteDoc(ref);
     }
+  });
+};
+
+export const addToFriendsList = async (userId: string, newFriendId: string) => {
+  //Add to each others friendList
+  updateDoc(doc(db, "people", userId), {
+    friendList: arrayUnion(newFriendId),
+  });
+  updateDoc(doc(db, "people", newFriendId), {
+    friendList: arrayUnion(userId),
   });
 };

@@ -4,8 +4,13 @@ import { Data } from "../app/features/people/people";
 import profile from "../images/profile.jpg";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { cancelFriendRequest, sendFriendRequest } from "../app/firebase";
+import {
+  addToFriendsList,
+  cancelFriendRequest,
+  sendFriendRequest,
+} from "../app/firebase";
 import { useAppDispatch } from "../app/hooks";
+import { addFriend as addFriendToStore } from "../app/features/friends/friends";
 import {
   addNewSentRequest,
   cancelSentRequest,
@@ -41,6 +46,11 @@ const PersonCard: React.FC<Props> = ({ person }) => {
     dispatch(cancelSentRequest(person.id));
   };
 
+  const acceptRequest = async () => {
+    await addToFriendsList(user.id, person.id);
+    addFriendToStore(person.id);
+  };
+
   const friendshipStatus = () => {
     if (friends.includes(person.id)) {
       return (
@@ -53,7 +63,15 @@ const PersonCard: React.FC<Props> = ({ person }) => {
     ) {
       return (
         <button className="request-sent" onClick={cancelRequest}>
-          Cancel request
+          Cancel Request
+        </button>
+      );
+    } else if (
+      friendRequests.received.some((request) => request.senderId === person.id)
+    ) {
+      return (
+        <button className="add-friend" onClick={acceptRequest}>
+          Accept Friend Request
         </button>
       );
     } else {
