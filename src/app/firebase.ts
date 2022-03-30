@@ -181,7 +181,7 @@ export const sendFriendRequest = async (
   }
 };
 
-export const cancelFriendRequest = async (
+export const deleteFriendRequest = async (
   senderId: string,
   receiverId: string
 ) => {
@@ -206,4 +206,6 @@ export const addToFriendsList = async (userId: string, newFriendId: string) => {
   updateDoc(doc(db, "people", newFriendId), {
     friendList: arrayUnion(userId),
   });
+  //Delete request
+  deleteFriendRequest(newFriendId, userId);
 };

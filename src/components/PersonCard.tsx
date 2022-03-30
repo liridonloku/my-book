@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import {
   addToFriendsList,
-  cancelFriendRequest,
+  deleteFriendRequest,
   sendFriendRequest,
 } from "../app/firebase";
 import { useAppDispatch } from "../app/hooks";
@@ -42,13 +42,13 @@ const PersonCard: React.FC<Props> = ({ person }) => {
   };
 
   const cancelRequest = async () => {
-    await cancelFriendRequest(user.id, person.id);
+    await deleteFriendRequest(user.id, person.id);
     dispatch(cancelSentRequest(person.id));
   };
 
   const acceptRequest = async () => {
     await addToFriendsList(user.id, person.id);
-    addFriendToStore(person.id);
+    dispatch(addFriendToStore(person.id));
   };
 
   const friendshipStatus = () => {
