@@ -4,13 +4,19 @@ import { Data } from "../app/features/people/people";
 import profile from "../images/profile.jpg";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
+import { sendFriendRequest } from "../app/firebase";
 
 interface Props {
   person: Data;
 }
 
 const PersonCard: React.FC<Props> = ({ person }) => {
+  const user = useSelector((state: RootState) => state.user);
   const friends = useSelector((state: RootState) => state.friends.data);
+
+  const addFriend = () => {
+    sendFriendRequest(user.id, person.id);
+  };
 
   return (
     <StyledPersonCard>
@@ -27,7 +33,9 @@ const PersonCard: React.FC<Props> = ({ person }) => {
               Friends
             </button>
           ) : (
-            <button className="add-friend">Add Friend</button>
+            <button className="add-friend" onClick={addFriend}>
+              Add Friend
+            </button>
           )}
         </div>
       </div>

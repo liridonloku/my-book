@@ -17,9 +17,11 @@ import {
   getFirestore,
   setDoc,
   doc,
+  addDoc,
   getDoc,
   getDocs,
   collection,
+  Timestamp,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
 import { login } from "./features/user/user";
@@ -142,4 +144,21 @@ export const getPeople = async (dispatch: AppDispatch) => {
   const people = querySnapshot.docs.map((person) => person.data());
   dispatch(addPeople(Array.from(people)));
   return people;
+};
+
+export const sendFriendRequest = async (
+  senderId: string,
+  receiverId: string,
+  status: string = "pending"
+) => {
+  try {
+    await addDoc(collection(db, "firendRequests"), {
+      senderId,
+      receiverId,
+      status,
+      date: Timestamp.now(),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
