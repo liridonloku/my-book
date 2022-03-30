@@ -57,7 +57,8 @@ const StyledPersonCard = styled.div`
         }
       }
 
-      .friends {
+      .friends,
+      .request-sent {
         padding: 10px 8px;
         font-weight: bold;
         border: none;

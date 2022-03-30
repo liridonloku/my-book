@@ -13,9 +13,36 @@ interface Props {
 const PersonCard: React.FC<Props> = ({ person }) => {
   const user = useSelector((state: RootState) => state.user);
   const friends = useSelector((state: RootState) => state.friends.data);
+  const friendRequests = useSelector(
+    (state: RootState) => state.friendRequests
+  );
 
   const addFriend = () => {
     sendFriendRequest(user.id, person.id);
+  };
+
+  const friendshipStatus = () => {
+    if (friends.includes(person.id)) {
+      return (
+        <button className="friends" disabled>
+          Friends
+        </button>
+      );
+    } else if (
+      friendRequests.sent.some((request) => request.receiverId === person.id)
+    ) {
+      return (
+        <button className="request-sent" disabled>
+          Request sent
+        </button>
+      );
+    } else {
+      return (
+        <button className="add-friend" onClick={addFriend}>
+          Add Friend
+        </button>
+      );
+    }
   };
 
   return (
@@ -27,17 +54,7 @@ const PersonCard: React.FC<Props> = ({ person }) => {
         <div className="user-name">
           <span>{person.name}</span>
         </div>
-        <div className="action-button">
-          {friends.includes(person.id) ? (
-            <button className="friends" disabled>
-              Friends
-            </button>
-          ) : (
-            <button className="add-friend" onClick={addFriend}>
-              Add Friend
-            </button>
-          )}
-        </div>
+        <div className="action-button">{friendshipStatus()}</div>
       </div>
     </StyledPersonCard>
   );

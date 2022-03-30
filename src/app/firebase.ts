@@ -146,13 +146,26 @@ export const getPeople = async (dispatch: AppDispatch) => {
   return people;
 };
 
+export const getFriendRequests = async () => {
+  const querySnapshot = await getDocs(collection(db, "friendRequests"));
+  const friendRequests = querySnapshot.docs.map((request) => request.data());
+  return friendRequests;
+};
+
 export const sendFriendRequest = async (
   senderId: string,
   receiverId: string,
   status: string = "pending"
 ) => {
+  //Check if request is already sent
+  const friendRequests = await getFriendRequests();
+  const requestExists = friendRequests.some(
+    (request) =>
+      request.senderId === senderId && request.receiverId === receiverId
+  );
+  if (requestExists) return;
   try {
-    await addDoc(collection(db, "firendRequests"), {
+    await addDoc(collection(db, "friendRequests"), {
       senderId,
       receiverId,
       status,
