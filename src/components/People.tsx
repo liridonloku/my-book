@@ -53,7 +53,7 @@ const People: React.FC<Props> = () => {
           </div>
         )}
         <div className="main" data-testid="main">
-          {people.map((person, index) => (
+          {people.map((person) => (
             <PersonCard key={person.id} person={person} />
           ))}
         </div>
