@@ -22,6 +22,9 @@ import {
   getDocs,
   collection,
   Timestamp,
+  deleteDoc,
+  DocumentReference,
+  DocumentData,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
 import { login } from "./features/user/user";
@@ -174,4 +177,21 @@ export const sendFriendRequest = async (
   } catch (error) {
     console.log(error);
   }
+};
+
+export const cancelFriendRequest = async (
+  senderId: string,
+  receiverId: string
+) => {
+  const querySnapshot = await getDocs(collection(db, "friendRequests"));
+  let ref: DocumentReference<DocumentData>;
+  querySnapshot.forEach((request) => {
+    if (
+      request.data().senderId === senderId &&
+      request.data().receiverId === receiverId
+    ) {
+      ref = request.ref;
+      deleteDoc(ref);
+    }
+  });
 };

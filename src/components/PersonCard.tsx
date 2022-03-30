@@ -4,13 +4,20 @@ import { Data } from "../app/features/people/people";
 import profile from "../images/profile.jpg";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { sendFriendRequest } from "../app/firebase";
+import { cancelFriendRequest, sendFriendRequest } from "../app/firebase";
+import { useAppDispatch } from "../app/hooks";
+import {
+  addNewSentRequest,
+  cancelSentRequest,
+} from "../app/features/friendRequests/friendRequests";
+import { Timestamp } from "firebase/firestore";
 
 interface Props {
   person: Data;
 }
 
 const PersonCard: React.FC<Props> = ({ person }) => {
+  const dispatch = useAppDispatch();
   const user = useSelector((state: RootState) => state.user);
   const friends = useSelector((state: RootState) => state.friends.data);
   const friendRequests = useSelector(
@@ -19,6 +26,19 @@ const PersonCard: React.FC<Props> = ({ person }) => {
 
   const addFriend = () => {
     sendFriendRequest(user.id, person.id);
+    dispatch(
+      addNewSentRequest({
+        senderId: user.id,
+        receiverId: person.id,
+        status: "pending",
+        date: Timestamp.now().toMillis(),
+      })
+    );
+  };
+
+  const cancelRequest = async () => {
+    await cancelFriendRequest(user.id, person.id);
+    dispatch(cancelSentRequest(person.id));
   };
 
   const friendshipStatus = () => {
@@ -32,8 +52,8 @@ const PersonCard: React.FC<Props> = ({ person }) => {
       friendRequests.sent.some((request) => request.receiverId === person.id)
     ) {
       return (
-        <button className="request-sent" disabled>
-          Request sent
+        <button className="request-sent" onClick={cancelRequest}>
+          Cancel request
         </button>
       );
     } else {

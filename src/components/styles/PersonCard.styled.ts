@@ -59,6 +59,7 @@ const StyledPersonCard = styled.div`
 
       .friends,
       .request-sent {
+        cursor: pointer;
         padding: 10px 8px;
         font-weight: bold;
         border: none;
