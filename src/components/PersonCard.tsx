@@ -14,14 +14,17 @@ import { addFriend as addFriendToStore } from "../app/features/friends/friends";
 import {
   addNewSentRequest,
   cancelSentRequest,
+  removeReceivedRequest,
 } from "../app/features/friendRequests/friendRequests";
 import { Timestamp } from "firebase/firestore";
 
 interface Props {
   person: Data;
+  toggleModal: Function;
+  setFriendId: Function;
 }
 
-const PersonCard: React.FC<Props> = ({ person }) => {
+const PersonCard: React.FC<Props> = ({ person, toggleModal, setFriendId }) => {
   const dispatch = useAppDispatch();
   const user = useSelector((state: RootState) => state.user);
   const friends = useSelector((state: RootState) => state.friends.data);
@@ -49,13 +52,25 @@ const PersonCard: React.FC<Props> = ({ person }) => {
   const acceptRequest = async () => {
     await addToFriendsList(user.id, person.id);
     dispatch(addFriendToStore(person.id));
+    dispatch(removeReceivedRequest(person.id));
+  };
+
+  const openConfirmationBox = () => {
+    setFriendId(person.id);
+    toggleModal();
   };
 
   const friendshipStatus = () => {
-    if (friends.includes(person.id)) {
+    if (user.id === person.id) {
       return (
-        <button className="friends" disabled>
-          Friends
+        <button className="friends me" disabled>
+          You
+        </button>
+      );
+    } else if (friends.includes(person.id)) {
+      return (
+        <button className="remove-friend" onClick={openConfirmationBox}>
+          Remove Friend
         </button>
       );
     } else if (
