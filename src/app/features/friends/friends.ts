@@ -14,8 +14,12 @@ const friendsSlice = createSlice({
     addFriend(state, action) {
       state.data = state.data.concat(action.payload);
     },
+    removeFriend(state, action) {
+      state.data = state.data.filter((id) => id !== action.payload);
+    },
   },
 });
 
-export const { populateFriendsList, addFriend } = friendsSlice.actions;
+export const { populateFriendsList, addFriend, removeFriend } =
+  friendsSlice.actions;
 export default friendsSlice.reducer;

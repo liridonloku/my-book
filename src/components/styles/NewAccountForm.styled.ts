@@ -40,12 +40,35 @@ const StyledNewAccountForm = styled.div`
       justify-content: center;
       align-items: center;
       padding: 10px 0;
+      gap: 10px;
 
       button {
         cursor: pointer;
         padding: 8px 60px;
         color: #fff;
         background-color: #42b72a;
+        border: none;
+        border-radius: 6px;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      button.remove {
+        cursor: pointer;
+        padding: 8px 60px;
+        color: #fff;
+        background-color: #f21818;
+        border: none;
+        border-radius: 6px;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      button.cancel {
+        cursor: pointer;
+        padding: 8px 60px;
+        color: #6d6d6d;
+        background-color: #f4f4f6;
         border: none;
         border-radius: 6px;
         font-size: 17px;

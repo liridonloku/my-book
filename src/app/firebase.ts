@@ -27,6 +27,7 @@ import {
   DocumentData,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
 import { login } from "./features/user/user";
@@ -189,6 +190,7 @@ export const deleteFriendRequest = async (
   let ref: DocumentReference<DocumentData>;
   querySnapshot.forEach((request) => {
     if (
+      //Sender and receiver match
       request.data().senderId === senderId &&
       request.data().receiverId === receiverId
     ) {
@@ -206,6 +208,23 @@ export const addToFriendsList = async (userId: string, newFriendId: string) => {
   updateDoc(doc(db, "people", newFriendId), {
     friendList: arrayUnion(userId),
   });
+
   //Delete request
   deleteFriendRequest(newFriendId, userId);
+
+  //In case they have sent each other a request simultaneously
+  deleteFriendRequest(userId, newFriendId);
+};
+
+export const removeFromFriendsList = async (
+  userId: string,
+  friendId: string
+) => {
+  //Remove from each others friendList
+  updateDoc(doc(db, "people", userId), {
+    friendList: arrayRemove(friendId),
+  });
+  updateDoc(doc(db, "people", friendId), {
+    friendList: arrayRemove(userId),
+  });
 };

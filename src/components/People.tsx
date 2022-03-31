@@ -7,6 +7,10 @@ import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 import PersonCard from "./PersonCard";
 import StyledHome from "./styles/Home.styled";
+import ConfirmFriendRemoval from "./ConfirmFriendRemoval";
+import { removeFromFriendsList } from "../app/firebase";
+import { removeFriend as removeFriendFromState } from "../app/features/friends/friends";
+import { useAppDispatch } from "../app/hooks";
 
 interface Props {}
 
@@ -14,7 +18,27 @@ const People: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
   useLoginStatus(user);
 
+  const dispatch = useAppDispatch();
+
   const people = useSelector((state: RootState) => state.people.data);
+
+  const [friendRemoveModal, setfriendRemoveModal] = useState(false);
+  const [idOfFriendToRemove, setidOfFriendToRemove] = useState("");
+
+  const toggleModal = () => {
+    setfriendRemoveModal(!friendRemoveModal);
+  };
+
+  const setFriendId = (id: string) => {
+    setidOfFriendToRemove(id);
+  };
+
+  const removeFriend = (id: string) => {
+    removeFromFriendsList(user.id, id);
+    dispatch(removeFriendFromState(id));
+    toggleModal();
+    setFriendId("");
+  };
 
   //Display sidebars based on screen width
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
@@ -23,7 +47,6 @@ const People: React.FC<Props> = () => {
   const [displayRightSidebar, setdisplayRightSidebar] = useState(
     window.innerWidth < 900 ? false : true
   );
-
   const resize = () => {
     if (window.innerWidth < 900) {
       setdisplayLeftSidebar(false);
@@ -54,7 +77,12 @@ const People: React.FC<Props> = () => {
         )}
         <div className="main" data-testid="main">
           {people.map((person) => (
-            <PersonCard key={person.id} person={person} />
+            <PersonCard
+              key={person.id}
+              person={person}
+              toggleModal={toggleModal}
+              setFriendId={setFriendId}
+            />
           ))}
         </div>
         {displayRightSidebar && (
@@ -63,6 +91,14 @@ const People: React.FC<Props> = () => {
           </div>
         )}
       </StyledHome>
+      {friendRemoveModal && (
+        <ConfirmFriendRemoval
+          id={idOfFriendToRemove}
+          toggleModal={toggleModal}
+          setFriendId={setFriendId}
+          removeFriend={removeFriend}
+        />
+      )}
     </>
   );
 };

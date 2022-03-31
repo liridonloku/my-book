@@ -57,6 +57,25 @@ const StyledPersonCard = styled.div`
         }
       }
 
+      .remove-friend {
+        cursor: pointer;
+        padding: 10px 8px;
+        color: #fff;
+        font-weight: bold;
+        background-color: #f21818;
+        border: none;
+        border-radius: 6px;
+        transition-duration: 100ms;
+
+        :hover {
+          background-color: #b31515;
+        }
+
+        :active {
+          transform: scale(0.97);
+        }
+      }
+
       .friends,
       .request-sent {
         cursor: pointer;

@@ -32,34 +32,34 @@ const Header: React.FC<Props> = () => {
           </div>
         </div>
         <div className="middle">
-          <div
-            className="home"
-            style={
-              location.pathname === "/"
-                ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
-                : {}
-            }
-          >
-            <h3>
-              <Link to={"/"}>
+          <Link to={"/"}>
+            <div
+              className="home"
+              style={
+                location.pathname === "/"
+                  ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
+                  : {}
+              }
+            >
+              <h3>
                 <Home
                   size={24}
                   data-testid="home"
                   style={location.pathname === "/" ? { color: "#1977f2" } : {}}
                 />
-              </Link>
-            </h3>
-          </div>
-          <div
-            className="people"
-            style={
-              location.pathname === "/people"
-                ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
-                : {}
-            }
-          >
-            <h3>
-              <Link to={"/people"}>
+              </h3>
+            </div>
+          </Link>
+          <Link to={"/people"}>
+            <div
+              className="people"
+              style={
+                location.pathname === "/people"
+                  ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
+                  : {}
+              }
+            >
+              <h3>
                 <People
                   size={24}
                   data-testid="people"
@@ -67,9 +67,9 @@ const Header: React.FC<Props> = () => {
                     location.pathname === "/people" ? { color: "#1977f2" } : {}
                   }
                 />
-              </Link>
-            </h3>
-          </div>
+              </h3>
+            </div>
+          </Link>
         </div>
         <div className="right">
           <div className="user">
