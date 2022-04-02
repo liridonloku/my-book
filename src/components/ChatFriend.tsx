@@ -1,16 +1,26 @@
 import React from "react";
 import StyledChatFriend from "./styles/ChatFriend.styled";
 import image from "../images/profile.jpg";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
-interface Props {}
+interface Props {
+  id: string;
+}
 
-const ChatFriend: React.FC<Props> = () => {
+const ChatFriend: React.FC<Props> = ({ id }) => {
+  const people = useSelector((state: RootState) => state.people.data);
+  const person = people.find((person) => person.id === id);
   return (
     <StyledChatFriend>
-      <div className="image">
-        <img src={image} alt="profile" />
-      </div>
-      <div className="name">User Name</div>
+      {person && (
+        <>
+          <div className="image">
+            <img src={person.photoUrl || image} alt="profile" />
+          </div>
+          <div className="name">{person.name}</div>
+        </>
+      )}
     </StyledChatFriend>
   );
 };

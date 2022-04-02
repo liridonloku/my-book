@@ -63,7 +63,7 @@ const PersonCard: React.FC<Props> = ({ person, toggleModal, setFriendId }) => {
   const friendshipStatus = () => {
     if (user.id === person.id) {
       return (
-        <button className="friends me" disabled>
+        <button className="friends you" disabled>
           You
         </button>
       );

@@ -16,7 +16,9 @@ const NewPost: React.FC<Props> = () => {
         <div className="image">
           <img src={user.photoUrl || image} alt="profile" />
         </div>
-        <div className="form">What's on your mind?</div>
+        <div className="form">
+          What's on your mind, {user.name.slice(0, user.name.indexOf(" "))}?
+        </div>
       </div>
       <div className="separator"></div>
       <div className="bottom">

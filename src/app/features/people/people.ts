@@ -5,7 +5,7 @@ export interface Data {
   id: string;
   email: string;
   photoUrl: string;
-  friendsList: Array<{ id: string }>;
+  friendList: Array<string>;
 }
 
 interface SliceState {
