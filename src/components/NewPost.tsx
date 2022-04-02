@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import StyledNewPost from "./styles/NewPost.styled";
 import image from "../images/profile.jpg";
 import { Videocam, Photo, EmojiEmotions } from "styled-icons/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
+import NewPostModal from "./NewPostModal";
 
 interface Props {}
 
 const NewPost: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
+
+  const [newPostModal, setnewPostModal] = useState(false);
+
+  const toggleNewPostModal = () => {
+    setnewPostModal(!newPostModal);
+  };
 
   return (
     <StyledNewPost>
@@ -16,7 +23,7 @@ const NewPost: React.FC<Props> = () => {
         <div className="image">
           <img src={user.photoUrl || image} alt="profile" />
         </div>
-        <div className="form">
+        <div className="form" onClick={toggleNewPostModal}>
           What's on your mind, {user.name.slice(0, user.name.indexOf(" "))}?
         </div>
       </div>
@@ -35,6 +42,7 @@ const NewPost: React.FC<Props> = () => {
           <p>Feeling</p>
         </div>
       </div>
+      {newPostModal && <NewPostModal toggleNewPostModal={toggleNewPostModal} />}
     </StyledNewPost>
   );
 };
