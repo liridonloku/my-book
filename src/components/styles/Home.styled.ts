@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledHome = styled.div`
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   display: flex;
   justify-content: space-between;
   background-color: #f0f2f5;

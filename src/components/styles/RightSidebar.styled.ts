@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 const StyledRightSidebar = styled.div`
   position: sticky;
-  top: 60px;
+  top: 62px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px);
+  max-height: calc(100vh - 62px);
   overflow-y: hidden;
   width: 300px;
 
