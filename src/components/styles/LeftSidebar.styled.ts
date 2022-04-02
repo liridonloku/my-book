@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const StyledLeftSidebar = styled.div`
+  position: sticky;
+  top: 62px;
+  max-height: calc(100vh - 62px);
   display: flex;
   flex-direction: column;
   overflow: auto;
