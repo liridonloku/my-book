@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./app/cloudinary";
 import Home from "./components/Home";
 import People from "./components/People";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
