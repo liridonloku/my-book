@@ -90,11 +90,24 @@ const StyledNewPostModal = styled.div`
 
       .post-image {
         display: flex;
+        position: relative;
         justify-content: center;
         img {
           width: 100%;
           max-height: 200px;
           object-fit: contain;
+        }
+        .remove-image {
+          cursor: pointer;
+          position: absolute;
+          top: 0;
+          right: 0;
+          background-color: #e4e6eb;
+          border-radius: 50%;
+
+          :hover {
+            background-color: #d0d3dc;
+          }
         }
       }
 
@@ -103,7 +116,13 @@ const StyledNewPostModal = styled.div`
         justify-content: center;
         padding: 5px 0;
 
-        button {
+        input[type="file"] {
+          z-index: -1;
+          position: absolute;
+          opacity: 0;
+        }
+
+        label {
           cursor: pointer;
           background: none;
           border: none;

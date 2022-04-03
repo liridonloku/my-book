@@ -12,14 +12,34 @@ interface Props {
 const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
   const user = useAppSelector((state) => state.user);
   const [caption, setcaption] = useState("");
-  const [image, setimage] = useState("");
+  const [image, setimage] = useState<string>("");
+  const [file, setfile] = useState<null | File>(null);
 
   //Growing text-box
   const textRef = useRef(null);
   useDynamicHeight(textRef, caption);
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const onCaptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setcaption(e.target.value);
+  };
+
+  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : "";
+    if (file) {
+      const reader = new FileReader();
+      setfile(file);
+      reader.onload = (e) => {
+        if (typeof e.target?.result === "string") {
+          setimage(e.target.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setfile(null);
+    setimage("");
   };
 
   return (
@@ -44,21 +64,33 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
               className="caption"
               rows={3}
               placeholder="What's on your mind?"
-              onChange={onChange}
+              onChange={onCaptionChange}
               value={caption}
             ></textarea>
           </div>
           {image && (
             <div className="post-image">
               <img src={image} alt="" />
+              <div className="remove-image" onClick={removeImage}>
+                <X size={24} color={"grey"} />
+              </div>
             </div>
           )}
           {!image && (
             <div className="add-image">
-              <button>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                accept="image/*"
+                onChange={(e) => {
+                  onImageChange(e);
+                }}
+              />
+              <label htmlFor="file">
                 <Image size={24} color={"green"} />
                 Add image
-              </button>
+              </label>
             </div>
           )}
         </div>
