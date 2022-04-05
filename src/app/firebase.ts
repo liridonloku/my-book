@@ -77,8 +77,6 @@ export const logInWithGoogle = async () => {
 
 export const logOutUser = async () => {
   await signOut(getAuth());
-  //Clear the redux state
-  window.location.reload();
 };
 
 interface Person {

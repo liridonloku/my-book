@@ -35,6 +35,10 @@ const friendRequestsSlice = createSlice({
         (request) => request.senderId !== action.payload
       );
     },
+    resetStateFriendRequests(state) {
+      state.sent = [];
+      state.received = [];
+    },
   },
 });
 
@@ -44,5 +48,6 @@ export const {
   cancelSentRequest,
   populateReceivedRequests,
   removeReceivedRequest,
+  resetStateFriendRequests,
 } = friendRequestsSlice.actions;
 export default friendRequestsSlice.reducer;

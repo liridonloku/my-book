@@ -13,12 +13,26 @@ import { logOutUser } from "../app/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { Link, useLocation } from "react-router-dom";
+import { useAppDispatch } from "../app/hooks";
+import { resetStateFriendRequests } from "../app/features/friendRequests/friendRequests";
+import { resetStateFriends } from "../app/features/friends/friends";
+import { resetStatePeople } from "../app/features/people/people";
+import { resetStatePosts } from "../app/features/posts/posts";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
   const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  const logOut = () => {
+    logOutUser();
+    dispatch(resetStateFriendRequests());
+    dispatch(resetStateFriends());
+    dispatch(resetStatePeople());
+    dispatch(resetStatePosts());
+  };
 
   return (
     <StyledHeader>
@@ -102,7 +116,7 @@ const Header: React.FC<Props> = () => {
             </div>
             <div className="settings">
               <h3>
-                <ArrowDropDown size={24} onClick={() => logOutUser()} />
+                <ArrowDropDown size={24} onClick={logOut} />
               </h3>
             </div>
           </div>

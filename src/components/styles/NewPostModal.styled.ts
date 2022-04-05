@@ -73,6 +73,7 @@ const StyledNewPostModal = styled.div`
       .caption-container {
         margin-bottom: 10px;
         .caption {
+          width: 100%;
           flex-grow: 1;
           cursor: text;
           border: none;

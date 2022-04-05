@@ -25,7 +25,6 @@ const App: React.FC = () => {
       let id = auth.currentUser?.uid || "";
       let email = auth.currentUser?.email || "";
       let photoUrl = auth.currentUser?.photoURL || "";
-      dispatch(login({ name, id, email, photoUrl }));
 
       //Populate people list
       const people = await getPeople(dispatch);
@@ -39,6 +38,7 @@ const App: React.FC = () => {
         dispatch(populateFriendsList(logedInUser.friendList));
         populateFriendRequests(logedInUser.id);
       }
+      dispatch(login({ name, id, email, photoUrl }));
     } else {
       dispatch(logout());
     }

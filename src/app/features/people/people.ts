@@ -19,8 +19,11 @@ const peopleSlice = createSlice({
     addPeople(state, action) {
       state.data = action.payload;
     },
+    resetStatePeople(state) {
+      state.data = [];
+    },
   },
 });
 
-export const { addPeople } = peopleSlice.actions;
+export const { addPeople, resetStatePeople } = peopleSlice.actions;
 export default peopleSlice.reducer;

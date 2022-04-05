@@ -72,6 +72,9 @@ const postsSlice = createSlice({
         return post;
       });
     },
+    resetStatePosts(state) {
+      state.data = [];
+    },
   },
 });
 
@@ -83,5 +86,6 @@ export const {
   unlikePost,
   commentOnPost,
   deleteComment,
+  resetStatePosts,
 } = postsSlice.actions;
 export default postsSlice.reducer;
