@@ -18,5 +18,5 @@ export const uploadPicture = async (file: File) => {
     "https://api.cloudinary.com/v1_1/dh72xea8l/upload",
     formData
   );
-  console.log(upload);
+  return upload;
 };

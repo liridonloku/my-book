@@ -28,6 +28,7 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  serverTimestamp,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
 import { login } from "./features/user/user";
@@ -227,4 +228,22 @@ export const removeFromFriendsList = async (
   updateDoc(doc(db, "people", friendId), {
     friendList: arrayRemove(userId),
   });
+};
+
+export const addNewPostToDB = async (
+  userId: string,
+  caption: string,
+  image: string
+) => {
+  const newPostRef = doc(collection(db, "posts"));
+  await setDoc(newPostRef, {
+    postId: newPostRef.id,
+    userId,
+    caption,
+    image,
+    date: serverTimestamp(),
+    likes: [],
+    comments: [],
+  });
+  return await getDoc(newPostRef);
 };
