@@ -3,7 +3,7 @@ import CommentBox from "../CommentBox";
 
 describe("Comment box", () => {
   beforeEach(() => {
-    render(<CommentBox />);
+    render(<CommentBox postId={"id"} />);
   });
 
   it("Renders user profile picture", () => {

@@ -3,7 +3,16 @@ import Comment from "../Comment";
 
 describe("Comment", () => {
   beforeEach(() => {
-    render(<Comment />);
+    render(
+      <Comment
+        comment={{
+          userId: "string",
+          date: 5,
+          content: "content",
+          likes: [],
+        }}
+      />
+    );
   });
 
   it("Renders the users profile picture", () => {

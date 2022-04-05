@@ -6,13 +6,19 @@ import { CommentData } from "../app/features/posts/posts";
 
 interface Props {
   comments: CommentData[];
+  postId: string;
 }
 
-const CommentSection: React.FC<Props> = ({ comments }) => {
+const CommentSection: React.FC<Props> = ({ comments, postId }) => {
+  const displayComments = () => {
+    return comments.map((comment) => {
+      return <Comment comment={comment} />;
+    });
+  };
   return (
     <StyledCommentSection>
-      <CommentBox />
-      <Comment />
+      <CommentBox postId={postId} />
+      {displayComments()}
     </StyledCommentSection>
   );
 };

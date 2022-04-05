@@ -63,7 +63,11 @@ const Post: React.FC<Props> = ({ post }) => {
         </div>
       </div>
       <div className="buttons">
-        <div className="like" data-testid="like-button">
+        <div
+          className="like"
+          data-testid="like-button"
+          style={post.likes.includes(user.id) ? { color: "#1977f2" } : {}}
+        >
           <h3>
             <ThumbUp size={16} />
           </h3>
@@ -76,7 +80,7 @@ const Post: React.FC<Props> = ({ post }) => {
           <h3>Comment</h3>
         </div>
       </div>
-      <CommentSection comments={post.comments} />
+      <CommentSection comments={post.comments} postId={post.postId} />
     </StyledPost>
   );
 };

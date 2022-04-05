@@ -11,7 +11,7 @@ export interface PostData {
 }
 
 export interface CommentData {
-  user: string;
+  userId: string;
   date: number;
   content: string;
   likes: string[];

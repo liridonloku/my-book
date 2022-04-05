@@ -5,9 +5,11 @@ import { Send } from "styled-icons/material/";
 import StyledCommentBox from "./styles/CommentBox.styled";
 import { useAppSelector } from "../app/hooks";
 
-interface Props {}
+interface Props {
+  postId: string;
+}
 
-const CommentBox: React.FC<Props> = () => {
+const CommentBox: React.FC<Props> = ({ postId }) => {
   const user = useAppSelector((state) => state.user);
   const [commentValue, setcommentValue] = useState("");
   const textRef = useRef(null);

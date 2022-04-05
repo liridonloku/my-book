@@ -29,6 +29,8 @@ import {
   arrayUnion,
   arrayRemove,
   serverTimestamp,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
 import { populatePosts } from "./features/posts/posts";
@@ -258,7 +260,9 @@ const convertDates = (posts: DocumentData[]) => {
 };
 
 export const getPostsFromDB = async (dispatch?: AppDispatch) => {
-  const querySnapshot = await getDocs(collection(db, "posts"));
+  const querySnapshot = await getDocs(
+    query(collection(db, "posts"), orderBy("date", "desc"))
+  );
   const posts = convertDates(querySnapshot.docs.map((post) => post.data()));
   if (dispatch) dispatch(populatePosts(posts));
   return posts;
