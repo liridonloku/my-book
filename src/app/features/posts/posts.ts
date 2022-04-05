@@ -31,6 +31,9 @@ const postsSlice = createSlice({
     addNewPost(state, action) {
       state.data.unshift(action.payload);
     },
+    deletePost(state, action) {
+      state.data = state.data.filter((post) => post.postId !== action.payload);
+    },
     likePost(state, action) {
       state.data = state.data.map((post) => {
         if (post.postId === action.payload.postId) {
@@ -75,6 +78,7 @@ const postsSlice = createSlice({
 export const {
   populatePosts,
   addNewPost,
+  deletePost,
   likePost,
   unlikePost,
   commentOnPost,

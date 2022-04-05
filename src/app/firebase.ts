@@ -308,3 +308,7 @@ export const deleteCommentFromDB = async (
     comments: filtered,
   });
 };
+
+export const deletePostFromDB = async (postId: string) => {
+  deleteDoc(doc(db, "posts", postId));
+};

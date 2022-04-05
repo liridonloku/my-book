@@ -54,6 +54,8 @@ const StyledPost = styled.div`
     }
 
     .right {
+      position: relative;
+
       .button {
         border-radius: 50%;
         cursor: pointer;
@@ -64,6 +66,27 @@ const StyledPost = styled.div`
 
         :hover {
           background-color: #f0f2f5;
+        }
+        .post-menu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background-color: white;
+          border-radius: 8px;
+          padding: 2px;
+          box-shadow: 0 2px 15px 2px rgba(0, 0, 0, 0.2);
+
+          .delete-post {
+            background: none;
+            border: none;
+            width: max-content;
+            max-width: 250px;
+            padding: 10px;
+
+            :hover {
+              background-color: #f0f2f5;
+            }
+          }
         }
       }
     }

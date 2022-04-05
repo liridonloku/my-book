@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import image from "../images/profile.jpg";
 import { MoreHoriz, ThumbUp, Comment } from "styled-icons/material";
 import StyledPost from "./styles/Post.styled";
@@ -6,8 +6,15 @@ import CommentSection from "./CommentSection";
 import { PostData, unlikePost } from "../app/features/posts/posts";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import calculateTime from "../helpers/calculateTime";
-import { likePostInDB, unlikePostInDB } from "../app/firebase";
-import { likePost as likePostInStore } from "../app/features/posts/posts";
+import {
+  deletePostFromDB,
+  likePostInDB,
+  unlikePostInDB,
+} from "../app/firebase";
+import {
+  likePost as likePostInStore,
+  deletePost as deletePostInStore,
+} from "../app/features/posts/posts";
 
 interface Props {
   post: PostData;
@@ -18,18 +25,31 @@ const Post: React.FC<Props> = ({ post }) => {
   const people = useAppSelector((state) => state.people.data);
   const person = people.find((person) => person.id === post.userId);
 
+  const [postMenu, setpostMenu] = useState(false);
+
   const dispatch = useAppDispatch();
 
-  const toggleLikeOnPost = async () => {
+  const toggleLikeOnPost = () => {
     if (post.likes.includes(user.id)) {
       //Post is already liked
       unlikePostInDB(post.postId, user.id);
       dispatch(unlikePost({ postId: post.postId, userId: user.id }));
     } else {
       // Like post
-      await likePostInDB(post.postId, user.id);
+      likePostInDB(post.postId, user.id);
       dispatch(likePostInStore({ postId: post.postId, userId: user.id }));
     }
+  };
+
+  const deletePost = () => {
+    // Delete post from DB
+    deletePostFromDB(post.postId);
+    // Delete post from store
+    dispatch(deletePostInStore(post.postId));
+  };
+
+  const togglePostMenu = () => {
+    setpostMenu(!postMenu);
   };
 
   return (
@@ -52,13 +72,27 @@ const Post: React.FC<Props> = ({ post }) => {
             </p>
           </div>
         </div>
-        <div className="right">
-          <div className="button">
-            <h3 data-testid="more-button">
-              <MoreHoriz size={24} />
-            </h3>
+        {post.userId === user.id && (
+          <div className="right">
+            <div
+              className="button"
+              typeof="button"
+              style={postMenu ? { backgroundColor: "#f0f2f5" } : {}}
+              onClick={togglePostMenu}
+            >
+              <h3 data-testid="more-button">
+                <MoreHoriz size={24} />
+              </h3>
+              {postMenu && (
+                <div className="post-menu">
+                  <button className="delete-post" onClick={deletePost}>
+                    Delete post
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="text">
         <p>{post.caption}</p>
@@ -76,7 +110,10 @@ const Post: React.FC<Props> = ({ post }) => {
           <p data-testid="likes">{post.likes.length}</p>
         </div>
         <div className="comments">
-          <p data-testid="comments">{post.comments.length} comments</p>
+          <p data-testid="comments">
+            {post.comments.length} comment
+            {post.comments.length === 1 ? "" : "s"}
+          </p>
         </div>
       </div>
       <div className="buttons">
