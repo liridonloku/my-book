@@ -267,3 +267,15 @@ export const getPostsFromDB = async (dispatch?: AppDispatch) => {
   if (dispatch) dispatch(populatePosts(posts));
   return posts;
 };
+
+export const likePostInDB = async (postId: string, userId: string) => {
+  await updateDoc(doc(db, "posts", postId), {
+    likes: arrayUnion(userId),
+  });
+};
+
+export const unlikePostInDB = async (postId: string, userId: string) => {
+  await updateDoc(doc(db, "posts", postId), {
+    likes: arrayRemove(userId),
+  });
+};

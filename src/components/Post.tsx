@@ -3,9 +3,11 @@ import image from "../images/profile.jpg";
 import { MoreHoriz, ThumbUp, Comment } from "styled-icons/material";
 import StyledPost from "./styles/Post.styled";
 import CommentSection from "./CommentSection";
-import { PostData } from "../app/features/posts/posts";
-import { useAppSelector } from "../app/hooks";
+import { PostData, unlikePost } from "../app/features/posts/posts";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import calculateTime from "../helpers/calculateTime";
+import { likePostInDB, unlikePostInDB } from "../app/firebase";
+import { likePost as likePostInStore } from "../app/features/posts/posts";
 
 interface Props {
   post: PostData;
@@ -15,6 +17,21 @@ const Post: React.FC<Props> = ({ post }) => {
   const user = useAppSelector((state) => state.user);
   const people = useAppSelector((state) => state.people.data);
   const person = people.find((person) => person.id === post.userId);
+
+  const dispatch = useAppDispatch();
+
+  const toggleLikeOnPost = async () => {
+    if (post.likes.includes(user.id)) {
+      //Post is already liked
+      unlikePostInDB(post.postId, user.id);
+      dispatch(unlikePost({ postId: post.postId, userId: user.id }));
+    } else {
+      // Like post
+      await likePostInDB(post.postId, user.id);
+      dispatch(likePostInStore({ postId: post.postId, userId: user.id }));
+    }
+  };
+
   return (
     <StyledPost>
       <div className="head">
@@ -67,6 +84,7 @@ const Post: React.FC<Props> = ({ post }) => {
           className="like"
           data-testid="like-button"
           style={post.likes.includes(user.id) ? { color: "#1977f2" } : {}}
+          onClick={toggleLikeOnPost}
         >
           <h3>
             <ThumbUp size={16} />
