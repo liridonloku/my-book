@@ -71,6 +71,9 @@ const Home: React.FC<Props> = () => {
         <div className="main" data-testid="main">
           <NewPost />
           {displayPosts()}
+          {posts.length === 0 && (
+            <p style={{ textAlign: "center" }}>No posts to show...</p>
+          )}
         </div>
         {displayRightSidebar && (
           <div className="right">

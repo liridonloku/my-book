@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./app/cloudinary";
 import Home from "./components/Home";
 import People from "./components/People";
+import Preload from "./components/Preload";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login, logout } from "./app/features/user/user";
 import { populateFriendsList } from "./app/features/friends/friends";
@@ -68,7 +69,8 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Preload />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/people" element={<People />} />
       </Routes>
     </BrowserRouter>

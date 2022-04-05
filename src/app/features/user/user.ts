@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     name: "",
-    id: "",
+    id: "preloadUserID4567894564321",
     email: "",
     photoUrl: "",
   },

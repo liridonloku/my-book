@@ -7,9 +7,12 @@ const useLoginStatus = (user: { name: string; id: string }) => {
   useEffect(() => {
     if ((!user || user.id === "") && location.pathname !== "/login") {
       navigate("/login", { replace: true });
-    }
-    if (user.id !== "" && location.pathname === "/login") {
-      navigate("/", { replace: true });
+    } else if (
+      user.id !== "" &&
+      user.id !== "preloadUserID4567894564321" &&
+      (location.pathname === "/login" || location.pathname === "/")
+    ) {
+      navigate("/home", { replace: true });
     }
   });
 };

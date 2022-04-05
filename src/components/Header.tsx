@@ -36,7 +36,7 @@ const Header: React.FC<Props> = () => {
             <div
               className="home"
               style={
-                location.pathname === "/"
+                location.pathname === "/home"
                   ? { borderBottom: "2px solid #1977f2", borderRadius: "0" }
                   : {}
               }
@@ -45,7 +45,9 @@ const Header: React.FC<Props> = () => {
                 <Home
                   size={24}
                   data-testid="home"
-                  style={location.pathname === "/" ? { color: "#1977f2" } : {}}
+                  style={
+                    location.pathname === "/home" ? { color: "#1977f2" } : {}
+                  }
                 />
               </h3>
             </div>
