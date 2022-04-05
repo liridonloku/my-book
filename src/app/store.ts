@@ -3,6 +3,7 @@ import userReducer from "./features/user/user";
 import peopleReducer from "./features/people/people";
 import friendsReducer from "./features/friends/friends";
 import friendRequestsReducer from "./features/friendRequests/friendRequests";
+import postsReducer from "./features/posts/posts";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     people: peopleReducer,
     friends: friendsReducer,
     friendRequests: friendRequestsReducer,
+    posts: postsReducer,
   },
 });
 
