@@ -107,10 +107,44 @@ const StyledHeader = styled.header`
       gap: 7px;
 
       div {
+        position: relative;
         cursor: pointer;
         padding: 7px;
         border-radius: 50%;
         background-color: #e4e6eb;
+
+        .user-menu {
+          position: absolute;
+          top: 110%;
+          right: 0;
+          background-color: white;
+          border-radius: 8px;
+          padding: 5px;
+          box-shadow: 0 2px 15px 2px rgba(0, 0, 0, 0.2);
+
+          :hover {
+            background-color: white;
+          }
+
+          .log-out {
+            cursor: pointer;
+            background: none;
+            border: none;
+            border-radius: 8px;
+            text-align: left;
+            //width: max-content;
+            min-width: 150px;
+            max-width: 250px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            :hover {
+              background-color: #e4e6eb;
+            }
+          }
+        }
       }
 
       div:hover {

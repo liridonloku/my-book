@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StyledHeader from "./styles/Header.styled";
 import {
   Home,
@@ -7,6 +7,7 @@ import {
   Inbox,
   Notifications,
   ArrowDropDown,
+  Logout,
 } from "@styled-icons/material";
 import profile from "../images/profile.jpg";
 import { logOutUser } from "../app/firebase";
@@ -26,7 +27,14 @@ const Header: React.FC<Props> = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
+  const [userMenu, setuserMenu] = useState(false);
+
+  const toggleUserMenu = () => {
+    setuserMenu(!userMenu);
+  };
+
   const logOut = () => {
+    toggleUserMenu();
     logOutUser();
     dispatch(resetStateFriendRequests());
     dispatch(resetStateFriends());
@@ -114,10 +122,21 @@ const Header: React.FC<Props> = () => {
                 <Notifications size={24} />
               </h3>
             </div>
-            <div className="settings">
+            <div
+              className="settings"
+              style={userMenu ? { backgroundColor: "#d0d3dc" } : {}}
+            >
               <h3>
-                <ArrowDropDown size={24} onClick={logOut} />
+                <ArrowDropDown size={24} onClick={toggleUserMenu} />
               </h3>
+              {userMenu && (
+                <div className="user-menu">
+                  <button className="log-out" onClick={logOut}>
+                    <Logout size={24} />
+                    Log out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
