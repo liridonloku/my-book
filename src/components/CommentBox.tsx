@@ -3,10 +3,12 @@ import useDynamicHeight from "../helpers/useDynamicHeight";
 import image from "../images/profile.jpg";
 import { Send } from "styled-icons/material/";
 import StyledCommentBox from "./styles/CommentBox.styled";
+import { useAppSelector } from "../app/hooks";
 
 interface Props {}
 
 const CommentBox: React.FC<Props> = () => {
+  const user = useAppSelector((state) => state.user);
   const [commentValue, setcommentValue] = useState("");
   const textRef = useRef(null);
   useDynamicHeight(textRef, commentValue);
@@ -18,7 +20,7 @@ const CommentBox: React.FC<Props> = () => {
   return (
     <StyledCommentBox>
       <div className="image">
-        <img src={image} alt="" data-testid="profile-pic" />
+        <img src={user.photoUrl || image} alt="" data-testid="profile-pic" />
       </div>
       <div className="comment-input">
         <textarea

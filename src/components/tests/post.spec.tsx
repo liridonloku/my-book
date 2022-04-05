@@ -3,7 +3,19 @@ import Post from "../Post";
 
 describe("Post Component", () => {
   beforeEach(() => {
-    render(<Post />);
+    render(
+      <Post
+        post={{
+          postId: "",
+          userId: "",
+          date: 5,
+          caption: "",
+          image: "",
+          likes: [],
+          comments: [],
+        }}
+      />
+    );
   });
 
   it("Renders the user profile image", () => {

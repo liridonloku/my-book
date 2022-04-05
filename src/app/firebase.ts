@@ -31,6 +31,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { addPeople } from "./features/people/people";
+import { populatePosts } from "./features/posts/posts";
 import { login } from "./features/user/user";
 import { AppDispatch } from "./store";
 // Your web app's Firebase configuration
@@ -246,4 +247,19 @@ export const addNewPostToDB = async (
     comments: [],
   });
   return await getDoc(newPostRef);
+};
+
+const convertDates = (posts: DocumentData[]) => {
+  const convertedDates = posts.map((post) => {
+    post.date = post.date.toMillis();
+    return post;
+  });
+  return convertedDates;
+};
+
+export const getPostsFromDB = async (dispatch?: AppDispatch) => {
+  const querySnapshot = await getDocs(collection(db, "posts"));
+  const posts = convertDates(querySnapshot.docs.map((post) => post.data()));
+  if (dispatch) dispatch(populatePosts(posts));
+  return posts;
 };

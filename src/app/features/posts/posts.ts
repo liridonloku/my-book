@@ -1,16 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export interface Data {
+export interface PostData {
   postId: string;
   userId: string;
   date: number;
   caption: string;
   image: string;
   likes: string[];
-  comments: Comment[];
+  comments: CommentData[];
 }
 
-interface Comment {
+export interface CommentData {
   user: string;
   date: number;
   content: string;
@@ -18,17 +18,17 @@ interface Comment {
 }
 
 interface SliceState {
-  data: Data[];
+  data: PostData[];
 }
 
 const postsSlice = createSlice({
   name: "posts",
   initialState: { data: [] } as SliceState,
   reducers: {
-    populatePosts(state, action: PayloadAction<Data[]>) {
+    populatePosts(state, action) {
       state.data = action.payload;
     },
-    addNewPost(state, action: PayloadAction<Data>) {
+    addNewPost(state, action) {
       state.data.unshift(action.payload);
     },
   },

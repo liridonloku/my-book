@@ -32,8 +32,8 @@ const calculateTime = (postDate: Date, now: Date): string => {
   }
   // Minutes
   if (differenceInMinutes >= 1) {
-    return `${differenceInMinutes} minute${
-      differenceInMinutes === 1 ? "" : "s"
+    return `${Math.floor(differenceInMinutes)} minute${
+      Math.floor(differenceInMinutes) === 1 ? "" : "s"
     } ago`;
   }
   // Now

@@ -79,7 +79,7 @@ const StyledPost = styled.div`
     justify-content: center;
     img {
       width: 100%;
-      max-height: 600px;
+      max-height: 500px;
       object-fit: contain;
     }
   }

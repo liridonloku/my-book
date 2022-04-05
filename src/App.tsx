@@ -8,7 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login, logout } from "./app/features/user/user";
 import { populateFriendsList } from "./app/features/friends/friends";
 import { useDispatch } from "react-redux";
-import { getFriendRequests, getPeople } from "./app/firebase";
+import { getFriendRequests, getPeople, getPostsFromDB } from "./app/firebase";
 import {
   populateReceivedRequests,
   populateSentRequests,
@@ -28,6 +28,9 @@ const App: React.FC = () => {
 
       //Populate people list
       const people = await getPeople(dispatch);
+
+      //Populate posts
+      await getPostsFromDB(dispatch);
 
       //Populate friends list and requests
       const logedInUser = people.find((person) => person.id === id);

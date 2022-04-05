@@ -3,23 +3,35 @@ import image from "../images/profile.jpg";
 import { MoreHoriz, ThumbUp, Comment } from "styled-icons/material";
 import StyledPost from "./styles/Post.styled";
 import CommentSection from "./CommentSection";
+import { PostData } from "../app/features/posts/posts";
+import { useAppSelector } from "../app/hooks";
+import calculateTime from "../helpers/calculateTime";
 
-interface Props {}
+interface Props {
+  post: PostData;
+}
 
-const Post: React.FC<Props> = () => {
+const Post: React.FC<Props> = ({ post }) => {
+  const user = useAppSelector((state) => state.user);
+  const people = useAppSelector((state) => state.people.data);
+  const person = people.find((person) => person.id === post.userId);
   return (
     <StyledPost>
       <div className="head">
         <div className="left">
           <div className="image">
-            <img src={image} alt="user" data-testid="user-image" />
+            <img
+              src={person?.photoUrl || image}
+              alt="user"
+              data-testid="user-image"
+            />
           </div>
           <div className="meta-data">
             <p className="user-name" data-testid="user-name">
-              User Name
+              {person?.name || "User Name"}
             </p>
             <p className="post-date" data-testid="post-date">
-              Date
+              {calculateTime(new Date(post.date), new Date(Date.now()))}
             </p>
           </div>
         </div>
@@ -32,20 +44,22 @@ const Post: React.FC<Props> = () => {
         </div>
       </div>
       <div className="text">
-        <p>Lorem Ipsum Dolor Sit Amet</p>
+        <p>{post.caption}</p>
       </div>
-      <div className="image">
-        <img src="http://placeimg.com/640/480/tech" alt="post" />
-      </div>
+      {post.image && (
+        <div className="image">
+          <img src={post.image} alt="post" loading="lazy" />
+        </div>
+      )}
       <div className="stats">
         <div className="likes">
           <p className="like-icon" data-testid="like-icon">
             <ThumbUp size={12} color="white" />
           </p>
-          <p data-testid="likes">0</p>
+          <p data-testid="likes">{post.likes.length}</p>
         </div>
         <div className="comments">
-          <p data-testid="comments">11 Comments</p>
+          <p data-testid="comments">{post.comments.length} comments</p>
         </div>
       </div>
       <div className="buttons">
@@ -62,7 +76,7 @@ const Post: React.FC<Props> = () => {
           <h3>Comment</h3>
         </div>
       </div>
-      <CommentSection />
+      <CommentSection comments={post.comments} />
     </StyledPost>
   );
 };

@@ -84,6 +84,7 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
 
     //Stop loading indicator
     setisLoading(false);
+    toggleNewPostModal();
   };
 
   return (

@@ -6,14 +6,31 @@ import LeftSidebar from "./LeftSidebar";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import RightSidebar from "./RightSidebar";
-import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { useAppSelector } from "../app/hooks";
 
 interface Props {}
 
 const Home: React.FC<Props> = () => {
-  const user = useSelector((state: RootState) => state.user);
+  const user = useAppSelector((state) => state.user);
   useLoginStatus(user);
+
+  const people = useAppSelector((state) => state.people.data);
+
+  const posts = useAppSelector((state) => state.posts.data);
+
+  const displayPosts = () => {
+    //Get users friendlist
+    const person = people.find((person) => person.id === user.id);
+    //Filter unaccessible posts
+    const filteredPosts = posts.filter(
+      (post) =>
+        post.userId === user.id || person?.friendList.includes(post.userId)
+    );
+    const postsToDisplay = filteredPosts.map((post) => {
+      return <Post key={post.postId} post={post} />;
+    });
+    return postsToDisplay;
+  };
 
   //Display sidebars based on screen width
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
@@ -53,8 +70,7 @@ const Home: React.FC<Props> = () => {
         )}
         <div className="main" data-testid="main">
           <NewPost />
-          <Post />
-          <Post />
+          {displayPosts()}
         </div>
         {displayRightSidebar && (
           <div className="right">
