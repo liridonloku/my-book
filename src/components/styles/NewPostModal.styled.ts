@@ -129,7 +129,7 @@ const StyledNewPostModal = styled.div`
           border-radius: 5px;
           padding: 3px 8px;
           display: flex;
-          align-items: center;
+          align-items: flex-end;
           gap: 5px;
           font-weight: bold;
 
@@ -157,6 +157,10 @@ const StyledNewPostModal = styled.div`
 
         :hover {
           background-color: #1559b3;
+        }
+
+        :disabled {
+          background-color: lightgray;
         }
       }
     }

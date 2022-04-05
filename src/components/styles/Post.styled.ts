@@ -71,6 +71,7 @@ const StyledPost = styled.div`
 
   .text {
     padding: 0 10px 10px 10px;
+    white-space: pre-wrap;
   }
 
   .image {

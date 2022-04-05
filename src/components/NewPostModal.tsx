@@ -4,6 +4,8 @@ import StyledNewPostModal from "./styles/NewPostModal.styled";
 import useDynamicHeight from "../helpers/useDynamicHeight";
 import { useAppSelector } from "../app/hooks";
 import defaultImg from "../images/profile.jpg";
+import { uploadPicture } from "../app/cloudinary";
+import LoadingAnimation from "./LoadingAnimation";
 
 interface Props {
   toggleNewPostModal: Function;
@@ -11,8 +13,9 @@ interface Props {
 
 const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
   const user = useAppSelector((state) => state.user);
+  const [isLoading, setisLoading] = useState(false);
   const [caption, setcaption] = useState("");
-  const [image, setimage] = useState<string>("");
+  const [image, setimage] = useState("");
   const [file, setfile] = useState<null | File>(null);
 
   //Growing text-box
@@ -24,7 +27,7 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
   };
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : "";
+    const file = e.target.files ? e.target.files[0] : null;
     if (file) {
       const reader = new FileReader();
       setfile(file);
@@ -40,6 +43,14 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
   const removeImage = () => {
     setfile(null);
     setimage("");
+  };
+
+  const post = async () => {
+    setisLoading(true);
+    if (file) {
+      await uploadPicture(file);
+    }
+    setisLoading(false);
   };
 
   return (
@@ -95,7 +106,9 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
           )}
         </div>
         <div className="submit">
-          <button>Post</button>
+          <button onClick={post} disabled={isLoading}>
+            {isLoading ? <LoadingAnimation /> : "Post"}
+          </button>
         </div>
       </div>
     </StyledNewPostModal>
