@@ -14,7 +14,7 @@ export interface CommentData {
   userId: string;
   date: number;
   content: string;
-  likes: string[];
+  id: string;
 }
 
 interface SliceState {
@@ -49,9 +49,35 @@ const postsSlice = createSlice({
         return post;
       });
     },
+    commentOnPost(state, action) {
+      state.data = state.data.map((post) => {
+        if (post.postId === action.payload.postId) {
+          post.comments.push(action.payload.comment);
+          return post;
+        }
+        return post;
+      });
+    },
+    deleteComment(state, action) {
+      state.data = state.data.map((post) => {
+        if (post.postId === action.payload.postId) {
+          post.comments = post.comments.filter(
+            (comment) => comment.id !== action.payload.commentId
+          );
+          return post;
+        }
+        return post;
+      });
+    },
   },
 });
 
-export const { populatePosts, addNewPost, likePost, unlikePost } =
-  postsSlice.actions;
+export const {
+  populatePosts,
+  addNewPost,
+  likePost,
+  unlikePost,
+  commentOnPost,
+  deleteComment,
+} = postsSlice.actions;
 export default postsSlice.reducer;

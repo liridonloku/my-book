@@ -2,17 +2,30 @@ import React from "react";
 import StyledComment from "./styles/Comment.styled";
 import image from "../images/profile.jpg";
 import { CommentData } from "../app/features/posts/posts";
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import calculateTime from "../helpers/calculateTime";
+import { Delete } from "styled-icons/fluentui-system-regular";
+import { deleteCommentFromDB } from "../app/firebase";
+import { deleteComment as deleteCommentFromStore } from "../app/features/posts/posts";
 
 interface Props {
   comment: CommentData;
+  postId: string;
 }
 
-const Comment: React.FC<Props> = ({ comment }) => {
-  const people = useAppSelector((state) => state.people.data);
+const Comment: React.FC<Props> = ({ comment, postId }) => {
   const user = useAppSelector((state) => state.user);
+  const people = useAppSelector((state) => state.people.data);
   const person = people.find((person) => person.id === comment.userId);
+
+  const dispatch = useAppDispatch();
+
+  const deleteComment = () => {
+    // Delete from database
+    deleteCommentFromDB(postId, comment.id);
+    // Delete from store
+    dispatch(deleteCommentFromStore({ postId, commentId: comment.id }));
+  };
   return (
     <StyledComment>
       <div className="image">
@@ -32,17 +45,15 @@ const Comment: React.FC<Props> = ({ comment }) => {
           </p>
         </div>
         <div className="comment-actions">
-          <p
-            className="like"
-            data-testid="like-button"
-            style={comment.likes.includes(user.id) ? { color: "#1977f2" } : {}}
-          >
-            {comment.likes.includes(user.id) ? "Unlike" : "Like"}
-          </p>
           <p className="date" data-testid="date-posted">
             {calculateTime(new Date(comment.date), new Date(Date.now()))}
           </p>
         </div>
+        {comment.userId === user.id && (
+          <div className="delete-comment" onClick={deleteComment}>
+            <Delete size={24} />
+          </div>
+        )}
       </div>
     </StyledComment>
   );

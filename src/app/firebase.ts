@@ -279,3 +279,32 @@ export const unlikePostInDB = async (postId: string, userId: string) => {
     likes: arrayRemove(userId),
   });
 };
+
+export const sendCommentToDB = async (
+  id: string,
+  postId: string,
+  userId: string,
+  content: string
+) => {
+  const comment = {
+    id,
+    userId,
+    content,
+    date: Timestamp.now().toMillis(),
+  };
+  await updateDoc(doc(db, "posts", postId), {
+    comments: arrayUnion(comment),
+  });
+};
+
+export const deleteCommentFromDB = async (
+  postId: string,
+  commentId: string
+) => {
+  const post = await getDoc(doc(db, "posts", postId));
+  const comments: any[] = post.data()?.comments;
+  const filtered = comments.filter((comment) => comment.id !== commentId);
+  updateDoc(doc(db, "posts", postId), {
+    comments: filtered,
+  });
+};

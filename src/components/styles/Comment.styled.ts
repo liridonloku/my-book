@@ -26,11 +26,14 @@ const StyledComment = styled.div`
   }
 
   .comment {
+    position: relative;
+
     .comment-content {
-      padding: 8px 10px;
+      padding: 8px 30px 8px 10px;
       font-size: 14px;
       border-radius: 15px;
       background-color: #f0f2f5;
+      white-space: pre-wrap;
 
       .user-name {
         font-weight: 600;
@@ -56,6 +59,14 @@ const StyledComment = styled.div`
           text-decoration: underline;
         }
       }
+    }
+
+    .delete-comment {
+      //display: none;
+      cursor: pointer;
+      position: absolute;
+      top: calc((100% - 32px) / 2);
+      right: 0px;
     }
   }
 `;

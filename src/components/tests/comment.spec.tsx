@@ -9,8 +9,9 @@ describe("Comment", () => {
           userId: "string",
           date: 5,
           content: "content",
-          likes: [],
+          id: "",
         }}
+        postId={""}
       />
     );
   });

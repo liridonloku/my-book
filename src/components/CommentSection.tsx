@@ -12,7 +12,7 @@ interface Props {
 const CommentSection: React.FC<Props> = ({ comments, postId }) => {
   const displayComments = () => {
     return comments.map((comment) => {
-      return <Comment comment={comment} />;
+      return <Comment key={comment.id} comment={comment} postId={postId} />;
     });
   };
   return (
