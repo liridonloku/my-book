@@ -20,8 +20,8 @@ const StyledChatFriend = styled.div`
 
     img {
       border-radius: 50%;
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
   }

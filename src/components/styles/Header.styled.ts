@@ -97,8 +97,8 @@ const StyledHeader = styled.header`
 
       img {
         border-radius: 50%;
-        max-width: 95%;
-        max-height: 95%;
+        width: 95%;
+        height: 95%;
         object-fit: cover;
       }
     }

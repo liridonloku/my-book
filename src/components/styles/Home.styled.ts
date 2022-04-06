@@ -16,7 +16,7 @@ const StyledHome = styled.div`
     width: 50%;
     min-width: 400px;
 
-    .user-info {
+    .person-info {
       background-color: white;
       border-radius: 8px;
       padding: 10px;

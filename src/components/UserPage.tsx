@@ -197,7 +197,7 @@ const UserPage: React.FC<Props> = () => {
         <StyledHome>
           {displayLeftSidebar && <div className="left"></div>}
           <div className="main" data-testid="main">
-            <div className="user-info">
+            <div className="person-info">
               <div className="left">
                 <div className="image">
                   <img src={person.photoUrl || profile} alt="" />
