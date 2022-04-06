@@ -17,6 +17,7 @@ import {
   removeReceivedRequest,
 } from "../app/features/friendRequests/friendRequests";
 import { Timestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   person: Data;
@@ -26,6 +27,8 @@ interface Props {
 
 const PersonCard: React.FC<Props> = ({ person, toggleModal, setFriendId }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const user = useSelector((state: RootState) => state.user);
   const friends = useSelector((state: RootState) => state.friends.data);
   const friendRequests = useSelector(
@@ -101,11 +104,22 @@ const PersonCard: React.FC<Props> = ({ person, toggleModal, setFriendId }) => {
   return (
     <StyledPersonCard>
       <div className="card">
-        <div className="image">
+        <div
+          className="image"
+          onClick={() => {
+            navigate(`/user/${person.id}`);
+          }}
+        >
           <img src={person.photoUrl || profile} alt="" />
         </div>
         <div className="user-name">
-          <span>{person.name}</span>
+          <span
+            onClick={() => {
+              navigate(`/user/${person.id}`);
+            }}
+          >
+            {person.name}
+          </span>
         </div>
         <div className="action-button">{friendshipStatus()}</div>
       </div>

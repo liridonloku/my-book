@@ -45,10 +45,15 @@ const StyledPost = styled.div`
 
         .user-name {
           font-weight: bold;
+
+          :hover {
+            text-decoration: underline;
+          }
         }
 
         .post-date {
           font-size: small;
+          cursor: default;
         }
       }
     }

@@ -14,6 +14,7 @@ import {
   populateReceivedRequests,
   populateSentRequests,
 } from "./app/features/friendRequests/friendRequests";
+import UserPage from "./components/UserPage";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Preload />} />
         <Route path="/home" element={<Home />} />
         <Route path="/people" element={<People />} />
+        <Route path="/user/:id" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );

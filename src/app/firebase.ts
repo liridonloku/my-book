@@ -222,10 +222,10 @@ export const removeFromFriendsList = async (
   friendId: string
 ) => {
   //Remove from each others friendList
-  updateDoc(doc(db, "people", userId), {
+  await updateDoc(doc(db, "people", userId), {
     friendList: arrayRemove(friendId),
   });
-  updateDoc(doc(db, "people", friendId), {
+  await updateDoc(doc(db, "people", friendId), {
     friendList: arrayRemove(userId),
   });
 };

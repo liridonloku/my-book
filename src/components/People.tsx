@@ -33,11 +33,12 @@ const People: React.FC<Props> = () => {
     setidOfFriendToRemove(id);
   };
 
-  const removeFriend = (id: string) => {
-    removeFromFriendsList(user.id, id);
+  const removeFriend = async (id: string) => {
     dispatch(removeFriendFromState(id));
+    await removeFromFriendsList(user.id, id);
     toggleModal();
     setFriendId("");
+    window.location.reload();
   };
 
   //Display sidebars based on screen width

@@ -15,6 +15,96 @@ const StyledHome = styled.div`
     max-width: min(680px, 90vw);
     width: 50%;
     min-width: 400px;
+
+    .user-info {
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        .image {
+          padding: 0;
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            border-radius: 50%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .text {
+          h4 {
+            color: #65676b;
+          }
+        }
+      }
+
+      .right {
+        .action-button {
+          .add-friend {
+            cursor: pointer;
+            padding: 10px 8px;
+            color: #fff;
+            font-weight: bold;
+            background-color: #1877f2;
+            border: none;
+            border-radius: 6px;
+            transition-duration: 100ms;
+
+            :hover {
+              background-color: #1559b3;
+            }
+
+            :active {
+              transform: scale(0.97);
+            }
+          }
+
+          .remove-friend {
+            cursor: pointer;
+            padding: 10px 8px;
+            color: #fff;
+            font-weight: bold;
+            background-color: #f21818;
+            border: none;
+            border-radius: 6px;
+            transition-duration: 100ms;
+
+            :hover {
+              background-color: #b31515;
+            }
+
+            :active {
+              transform: scale(0.97);
+            }
+          }
+
+          .friends,
+          .request-sent {
+            cursor: pointer;
+            padding: 10px 8px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+          }
+        }
+      }
+    }
   }
 
   @media (max-width: 480px) {

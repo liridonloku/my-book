@@ -15,6 +15,7 @@ import {
   likePost as likePostInStore,
   deletePost as deletePostInStore,
 } from "../app/features/posts/posts";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   post: PostData;
@@ -28,6 +29,7 @@ const Post: React.FC<Props> = ({ post }) => {
   const [postMenu, setpostMenu] = useState(false);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const toggleLikeOnPost = () => {
     if (post.likes.includes(user.id)) {
@@ -56,7 +58,12 @@ const Post: React.FC<Props> = ({ post }) => {
     <StyledPost>
       <div className="head">
         <div className="left">
-          <div className="image">
+          <div
+            className="image"
+            onClick={() => {
+              navigate(`/user/${person?.id}`);
+            }}
+          >
             <img
               src={person?.photoUrl || image}
               alt="user"
@@ -64,7 +71,13 @@ const Post: React.FC<Props> = ({ post }) => {
             />
           </div>
           <div className="meta-data">
-            <p className="user-name" data-testid="user-name">
+            <p
+              className="user-name"
+              data-testid="user-name"
+              onClick={() => {
+                navigate(`/user/${person?.id}`);
+              }}
+            >
               {person?.name || "User Name"}
             </p>
             <p className="post-date" data-testid="post-date">
