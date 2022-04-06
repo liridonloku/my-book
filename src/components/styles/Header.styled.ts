@@ -7,6 +7,7 @@ const StyledHeader = styled.header`
   padding: 3px 5px;
   background-color: #fff;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 
   .container {
     display: flex;
