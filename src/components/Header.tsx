@@ -19,6 +19,7 @@ import { resetStateFriendRequests } from "../app/features/friendRequests/friendR
 import { resetStateFriends } from "../app/features/friends/friends";
 import { resetStatePeople } from "../app/features/people/people";
 import { resetStatePosts } from "../app/features/posts/posts";
+import { CircleSlash } from "styled-icons/octicons";
 
 interface Props {}
 
@@ -111,16 +112,25 @@ const Header: React.FC<Props> = () => {
               <h3>
                 <Apps size={24} />
               </h3>
+              <div className="not-available">
+                <CircleSlash size={16} color={"red"} />
+              </div>
             </div>
             <div className="messages">
               <h3>
                 <Inbox size={24} />
               </h3>
+              <div className="not-available">
+                <CircleSlash size={16} color={"red"} />
+              </div>
             </div>
             <div className="notifications">
               <h3>
                 <Notifications size={24} />
               </h3>
+              <div className="not-available">
+                <CircleSlash size={16} color={"red"} />
+              </div>
             </div>
             <div
               className="settings"

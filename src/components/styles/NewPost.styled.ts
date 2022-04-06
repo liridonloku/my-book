@@ -63,6 +63,7 @@ const StyledNewPost = styled.div`
     margin-top: 10px;
 
     div {
+      position: relative;
       width: 33%;
       display: flex;
       justify-content: center;
@@ -74,6 +75,13 @@ const StyledNewPost = styled.div`
       color: #65676b;
       font-weight: bold;
       font-size: 14px;
+
+      .not-available {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: none;
+      }
     }
 
     div:hover {

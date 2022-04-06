@@ -114,6 +114,13 @@ const StyledHeader = styled.header`
         border-radius: 50%;
         background-color: #e4e6eb;
 
+        .not-available {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          background: none;
+        }
+
         .user-menu {
           position: absolute;
           top: 110%;

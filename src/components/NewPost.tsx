@@ -5,6 +5,7 @@ import { Videocam, Photo, EmojiEmotions } from "styled-icons/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import NewPostModal from "./NewPostModal";
+import { CircleSlash } from "styled-icons/octicons";
 
 interface Props {}
 
@@ -32,6 +33,9 @@ const NewPost: React.FC<Props> = () => {
         <div className="video-post">
           <Videocam size={24} color="red" />
           <p>Live Video</p>
+          <div className="not-available">
+            <CircleSlash size={16} color={"red"} />
+          </div>
         </div>
         <div className="photo-post">
           <Photo size={24} color="green" />
@@ -40,6 +44,9 @@ const NewPost: React.FC<Props> = () => {
         <div className="feeling-post">
           <EmojiEmotions size={24} color="orange" />
           <p>Feeling</p>
+          <div className="not-available" style={{ top: "-8px", right: "0px" }}>
+            <CircleSlash size={16} color={"red"} />
+          </div>
         </div>
       </div>
       {newPostModal && <NewPostModal toggleNewPostModal={toggleNewPostModal} />}
