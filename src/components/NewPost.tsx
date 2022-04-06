@@ -37,7 +37,7 @@ const NewPost: React.FC<Props> = () => {
             <CircleSlash size={16} color={"red"} />
           </div>
         </div>
-        <div className="photo-post">
+        <div className="photo-post" onClick={toggleNewPostModal}>
           <Photo size={24} color="green" />
           <p>Photo</p>
         </div>

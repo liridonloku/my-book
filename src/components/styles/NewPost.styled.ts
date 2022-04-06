@@ -84,7 +84,7 @@ const StyledNewPost = styled.div`
       }
     }
 
-    div:hover {
+    .photo-post:hover {
       background-color: #f0f2f5;
     }
   }

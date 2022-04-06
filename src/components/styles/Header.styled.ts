@@ -155,7 +155,7 @@ const StyledHeader = styled.header`
         }
       }
 
-      div:hover {
+      .settings:hover {
         background-color: #d0d3dc;
       }
     }
