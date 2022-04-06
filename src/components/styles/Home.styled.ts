@@ -31,6 +31,7 @@ const StyledHome = styled.div`
         align-items: center;
         gap: 5px;
         .image {
+          position: relative;
           padding: 0;
           border-radius: 50%;
           width: 100px;
@@ -44,6 +45,26 @@ const StyledHome = styled.div`
             max-width: 100%;
             max-height: 100%;
             object-fit: cover;
+          }
+
+          .change-image {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2px 5px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            width: max-content;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 80%;
+          }
+
+          :hover {
+            .change-image {
+              display: flex;
+            }
           }
         }
 

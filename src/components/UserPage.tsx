@@ -22,6 +22,7 @@ import {
 } from "../app/features/friends/friends";
 import { Timestamp } from "@firebase/firestore";
 import ConfirmFriendRemoval from "./ConfirmFriendRemoval";
+import { ImageEdit } from "styled-icons/fluentui-system-regular";
 
 interface Props {}
 
@@ -178,12 +179,18 @@ const UserPage: React.FC<Props> = () => {
               <div className="left">
                 <div className="image">
                   <img src={person.photoUrl || profile} alt="" />
+                  {person.id === user.id && (
+                    <div className="change-image">
+                      <ImageEdit size={24} color={"grey"} />
+                      Change picture
+                    </div>
+                  )}
                 </div>
                 <div className="text">
                   <h3>{person.name}</h3>
                   <h4>
-                    {person.friendList.length} Friend
-                    {person.friendList.length === 1 ? "" : "s"}
+                    {person.friendList.length - 1} Friend
+                    {person.friendList.length - 1 === 1 ? "" : "s"}
                   </h4>
                 </div>
               </div>
@@ -191,8 +198,13 @@ const UserPage: React.FC<Props> = () => {
                 <div className="action-button">{friendshipStatus()}</div>
               </div>
             </div>
-            {userFriends?.includes(person.id) &&
-              personPosts.map((post) => <Post key={post.postId} post={post} />)}
+            {userFriends?.includes(person.id) ? (
+              personPosts.map((post) => <Post key={post.postId} post={post} />)
+            ) : (
+              <p>
+                Add {person.name} as a friend to be able to see their posts.
+              </p>
+            )}
           </div>
           {displayRightSidebar && <div className="right"></div>}
         </StyledHome>
