@@ -29,8 +29,11 @@ const userSlice = createSlice({
       state.email = "";
       state.photoUrl = "";
     },
+    changePhotoUrl(state, action) {
+      state.photoUrl = action.payload;
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, changePhotoUrl } = userSlice.actions;
 export default userSlice.reducer;

@@ -19,11 +19,21 @@ const peopleSlice = createSlice({
     addPeople(state, action) {
       state.data = action.payload;
     },
+    changePersonPhoto(state, action) {
+      state.data = state.data.map((person) => {
+        if (person.id === action.payload.id) {
+          person.photoUrl = action.payload.imageUrl;
+          return person;
+        }
+        return person;
+      });
+    },
     resetStatePeople(state) {
       state.data = [];
     },
   },
 });
 
-export const { addPeople, resetStatePeople } = peopleSlice.actions;
+export const { addPeople, resetStatePeople, changePersonPhoto } =
+  peopleSlice.actions;
 export default peopleSlice.reducer;

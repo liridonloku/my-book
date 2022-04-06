@@ -7,6 +7,8 @@ import StyledHome from "./styles/Home.styled";
 import profile from "../images/profile.jpg";
 import {
   addToFriendsList,
+  changePersonPhotoUrl,
+  changeProfilePicture,
   deleteFriendRequest,
   removeFromFriendsList,
   sendFriendRequest,
@@ -23,6 +25,9 @@ import {
 import { Timestamp } from "@firebase/firestore";
 import ConfirmFriendRemoval from "./ConfirmFriendRemoval";
 import { ImageEdit } from "styled-icons/fluentui-system-regular";
+import { uploadPicture } from "../app/cloudinary";
+import { changePersonPhoto } from "../app/features/people/people";
+import { changePhotoUrl } from "../app/features/user/user";
 
 interface Props {}
 
@@ -168,6 +173,23 @@ const UserPage: React.FC<Props> = () => {
     }
   };
 
+  const onImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      //Updload to cloudinary
+      const imageData = await uploadPicture(file);
+      const imageUrl = imageData.data.secure_url;
+      //Update userProfile
+      changeProfilePicture(imageUrl);
+      //Update people
+      changePersonPhotoUrl(user.id, imageUrl);
+      //Update store (user and person)
+      dispatch(changePersonPhoto({ id: user.id, imageUrl }));
+      dispatch(changePhotoUrl(imageUrl));
+    }
+    e.target.value = "";
+  };
+
   return (
     <>
       <Header />
@@ -180,10 +202,21 @@ const UserPage: React.FC<Props> = () => {
                 <div className="image">
                   <img src={person.photoUrl || profile} alt="" />
                   {person.id === user.id && (
-                    <div className="change-image">
-                      <ImageEdit size={24} color={"grey"} />
-                      Change picture
-                    </div>
+                    <>
+                      <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          onImageChange(e);
+                        }}
+                      />
+                      <label htmlFor="file" className="change-image">
+                        <ImageEdit size={24} color={"grey"} />
+                        Change picture
+                      </label>
+                    </>
                   )}
                 </div>
                 <div className="text">
@@ -198,10 +231,11 @@ const UserPage: React.FC<Props> = () => {
                 <div className="action-button">{friendshipStatus()}</div>
               </div>
             </div>
+            <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Posts</h2>
             {userFriends?.includes(person.id) ? (
               personPosts.map((post) => <Post key={post.postId} post={post} />)
             ) : (
-              <p>
+              <p style={{ textAlign: "center" }}>
                 Add {person.name} as a friend to be able to see their posts.
               </p>
             )}

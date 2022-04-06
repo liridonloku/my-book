@@ -42,9 +42,15 @@ const StyledHome = styled.div`
 
           img {
             border-radius: 50%;
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+          }
+
+          input[type="file"] {
+            z-index: -1;
+            position: absolute;
+            opacity: 0;
           }
 
           .change-image {

@@ -133,6 +133,22 @@ export const createNewAccount = async (
   }
 };
 
+export const changeProfilePicture = async (imageUrl: string) => {
+  let user = getAuth().currentUser;
+  if (user) {
+    await updateProfile(user, { photoURL: imageUrl });
+  }
+};
+
+export const changePersonPhotoUrl = async (
+  userId: string,
+  imageUrl: string
+) => {
+  await updateDoc(doc(db, "people", userId), {
+    photoUrl: imageUrl,
+  });
+};
+
 interface LoginData {
   email: string;
   password: string;
@@ -146,10 +162,12 @@ export const sendResetPasswordLink = async (email: string) => {
   return await sendPasswordResetEmail(auth, email);
 };
 
-export const getPeople = async (dispatch: AppDispatch) => {
+export const getPeople = async (dispatch?: AppDispatch) => {
   const querySnapshot = await getDocs(collection(db, "people"));
   const people = querySnapshot.docs.map((person) => person.data());
-  dispatch(addPeople(Array.from(people)));
+  if (dispatch) {
+    dispatch(addPeople(Array.from(people)));
+  }
   return people;
 };
 
