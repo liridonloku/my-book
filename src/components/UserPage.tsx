@@ -234,8 +234,8 @@ const UserPage: React.FC<Props> = () => {
                     <>
                       <input
                         type="file"
-                        name="file"
-                        id="profile-picure-input"
+                        name="profile-picture-input"
+                        id="profile-picture-input"
                         accept="image/*"
                         onChange={(e) => {
                           onImageChange(e);
