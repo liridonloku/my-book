@@ -235,13 +235,16 @@ const UserPage: React.FC<Props> = () => {
                       <input
                         type="file"
                         name="file"
-                        id="file"
+                        id="profile-picure-input"
                         accept="image/*"
                         onChange={(e) => {
                           onImageChange(e);
                         }}
                       />
-                      <label htmlFor="file" className="change-image">
+                      <label
+                        htmlFor="profile-picture-input"
+                        className="change-image"
+                      >
                         <ImageEdit size={24} color={"grey"} />
                         Change picture
                       </label>
