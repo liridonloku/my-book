@@ -87,12 +87,20 @@ interface Person {
 
 const addPersonToDB = async ({ id, name, email = "", photoUrl }: Person) => {
   try {
+    //Create person and add some starter friends :)
     await setDoc(doc(db, "people", id), {
       id,
       name,
       email,
       photoUrl,
-      friendList: [id],
+      friendList: [
+        id,
+        "2JnyQp1yapXtadfknLCL2riGF8F3",
+        "H3QzWwJLAyYijDctw16rX4JYSET2",
+        "OeGqVnQogZSvDTXmq6NEJHaJaz82",
+        "arm1SN7dfbe0joLfTfgVgQMt4sx1",
+        "wlFuNcijBad240uYt047DYVLxmg1",
+      ],
     });
   } catch (error) {
     console.log(error);
