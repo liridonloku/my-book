@@ -23,13 +23,13 @@ const Home: React.FC<Props> = () => {
   const [hasMore, sethasMore] = useState(true);
 
   useEffect(() => {
-    setrelevantPosts(
-      posts
-        .filter(
-          (post) => post.userId === user.id || friends.includes(post.userId)
-        )
-        .slice(0, 5)
+    const filteredPosts = posts.filter(
+      (post) => post.userId === user.id || friends.includes(post.userId)
     );
+    setrelevantPosts(filteredPosts.slice(0, 5));
+    if (filteredPosts.length <= 5) {
+      sethasMore(false);
+    }
   }, [friends, posts, user.id]);
 
   const addMore = () => {
