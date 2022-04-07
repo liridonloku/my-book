@@ -28,6 +28,17 @@ const Post: React.FC<Props> = ({ post }) => {
 
   const [postMenu, setpostMenu] = useState(false);
 
+  const [showComments, setshowComments] = useState(true);
+  const [showAll, setshowAll] = useState(false);
+
+  const toggleComments = () => {
+    setshowComments((previous) => !previous);
+  };
+
+  const toggleShowAllComments = () => {
+    setshowAll((previous) => !previous);
+  };
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -123,7 +134,7 @@ const Post: React.FC<Props> = ({ post }) => {
           <p data-testid="likes">{post.likes.length}</p>
         </div>
         <div className="comments">
-          <p data-testid="comments">
+          <p data-testid="comments" onClick={toggleComments}>
             {post.comments.length} comment
             {post.comments.length === 1 ? "" : "s"}
           </p>
@@ -148,7 +159,22 @@ const Post: React.FC<Props> = ({ post }) => {
           <h3>Comment</h3>
         </div>
       </div>
-      <CommentSection comments={post.comments} postId={post.postId} />
+      <CommentSection
+        comments={post.comments}
+        postId={post.postId}
+        showComments={showComments}
+        showAll={showAll}
+      />
+      {post.comments.length > 3 && !showAll && (
+        <p className="show-all-comments" onClick={toggleShowAllComments}>
+          Show all comments
+        </p>
+      )}
+      {post.comments.length > 3 && showAll && (
+        <p className="show-fewer-comments" onClick={toggleShowAllComments}>
+          Show fewer comments
+        </p>
+      )}
     </StyledPost>
   );
 };

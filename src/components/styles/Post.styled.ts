@@ -170,6 +170,18 @@ const StyledPost = styled.div`
       }
     }
   }
+
+  .show-all-comments,
+  .show-fewer-comments {
+    text-align: center;
+    color: rgb(25, 119, 242);
+    cursor: pointer;
+    padding-bottom: 5px;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export default StyledPost;

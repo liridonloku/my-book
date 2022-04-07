@@ -55,7 +55,7 @@ const postsSlice = createSlice({
     commentOnPost(state, action) {
       state.data = state.data.map((post) => {
         if (post.postId === action.payload.postId) {
-          post.comments.push(action.payload.comment);
+          post.comments.unshift(action.payload.comment);
           return post;
         }
         return post;
