@@ -14,17 +14,14 @@ const Home: React.FC<Props> = () => {
   const user = useAppSelector((state) => state.user);
   useLoginStatus(user);
 
-  const people = useAppSelector((state) => state.people.data);
+  const friends = useAppSelector((state) => state.friends.data);
 
   const posts = useAppSelector((state) => state.posts.data);
 
   const displayPosts = () => {
-    //Get users friendlist
-    const person = people.find((person) => person.id === user.id);
     //Filter unaccessible posts
     const filteredPosts = posts.filter(
-      (post) =>
-        post.userId === user.id || person?.friendList.includes(post.userId)
+      (post) => post.userId === user.id || friends.includes(post.userId)
     );
     const postsToDisplay = filteredPosts.map((post) => {
       return <Post key={post.postId} post={post} />;

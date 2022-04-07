@@ -75,13 +75,6 @@ const StyledNewPost = styled.div`
       color: #65676b;
       font-weight: bold;
       font-size: 14px;
-
-      /* .not-available {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background: none;
-      } */
     }
 
     .photo-post:hover {

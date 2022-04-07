@@ -44,9 +44,7 @@ const UserPage: React.FC<Props> = () => {
   const posts = useAppSelector((state) => state.posts.data);
   const friendRequests = useAppSelector((state) => state.friendRequests);
 
-  const userFriends = people.find(
-    (person) => person.id === user.id
-  )?.friendList;
+  const userFriends = useAppSelector((state) => state.friends.data);
 
   const person = people.find((person) => person.id === id);
   const personPosts = posts.filter((post) => post.userId === person?.id);
