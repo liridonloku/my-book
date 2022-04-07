@@ -7,6 +7,7 @@ import calculateTime from "../helpers/calculateTime";
 import { Delete } from "styled-icons/fluentui-system-regular";
 import { deleteCommentFromDB } from "../app/firebase";
 import { deleteComment as deleteCommentFromStore } from "../app/features/posts/posts";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   comment: CommentData;
@@ -19,6 +20,7 @@ const Comment: React.FC<Props> = ({ comment, postId }) => {
   const person = people.find((person) => person.id === comment.userId);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const deleteComment = () => {
     // Delete from database
@@ -28,7 +30,12 @@ const Comment: React.FC<Props> = ({ comment, postId }) => {
   };
   return (
     <StyledComment>
-      <div className="image">
+      <div
+        className="image"
+        onClick={() => {
+          navigate(`/user/${person?.id}`);
+        }}
+      >
         <img
           src={person?.photoUrl || image}
           alt="profile"
@@ -37,7 +44,13 @@ const Comment: React.FC<Props> = ({ comment, postId }) => {
       </div>
       <div className="comment">
         <div className="comment-content">
-          <p className="user-name" data-testid="user-name">
+          <p
+            className="user-name"
+            data-testid="user-name"
+            onClick={() => {
+              navigate(`/user/${person?.id}`);
+            }}
+          >
             {person?.name || "User Name"}
           </p>
           <p className="comment-text" data-testid="comment-text">

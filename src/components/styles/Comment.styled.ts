@@ -38,6 +38,11 @@ const StyledComment = styled.div`
       .user-name {
         font-weight: 600;
         font-size: 13px;
+        cursor: pointer;
+
+        :hover {
+          text-decoration: underline;
+        }
       }
     }
 

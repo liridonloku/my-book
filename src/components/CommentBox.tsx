@@ -8,6 +8,7 @@ import { sendCommentToDB } from "../app/firebase";
 import { commentOnPost } from "../app/features/posts/posts";
 import { Timestamp } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   postId: string;
@@ -15,7 +16,10 @@ interface Props {
 
 const CommentBox: React.FC<Props> = ({ postId }) => {
   const user = useAppSelector((state) => state.user);
+
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [commentValue, setcommentValue] = useState("");
   const textRef = useRef(null);
   useDynamicHeight(textRef, commentValue);
@@ -50,7 +54,12 @@ const CommentBox: React.FC<Props> = ({ postId }) => {
 
   return (
     <StyledCommentBox>
-      <div className="image">
+      <div
+        className="image"
+        onClick={() => {
+          navigate(`/user/${user.id}`);
+        }}
+      >
         <img src={user.photoUrl || image} alt="" data-testid="profile-pic" />
       </div>
       <div className="comment-input">
