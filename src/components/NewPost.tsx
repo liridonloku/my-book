@@ -6,11 +6,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import NewPostModal from "./NewPostModal";
 import { CircleSlash } from "styled-icons/octicons";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
 const NewPost: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
+
+  const navigate = useNavigate();
 
   const [newPostModal, setnewPostModal] = useState(false);
 
@@ -21,7 +24,12 @@ const NewPost: React.FC<Props> = () => {
   return (
     <StyledNewPost>
       <div className="top">
-        <div className="image">
+        <div
+          className="image"
+          onClick={() => {
+            navigate(`/user/${user.id}`);
+          }}
+        >
           <img src={user.photoUrl || image} alt="profile" />
         </div>
         <div className="form" onClick={toggleNewPostModal}>

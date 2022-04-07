@@ -5,7 +5,7 @@ const StyledCommentBox = styled.div`
   align-items: center;
   margin-bottom: 10px;
 
-  .image {
+  .comment-box-image {
     flex-shrink: 0;
     border-radius: 50%;
     width: 38px;
@@ -19,8 +19,8 @@ const StyledCommentBox = styled.div`
 
     img {
       border-radius: 50%;
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
   }

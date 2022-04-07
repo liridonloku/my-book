@@ -31,6 +31,7 @@ import { changePhotoUrl } from "../app/features/user/user";
 import { PostData } from "../app/features/posts/posts";
 import useLoginStatus from "../helpers/useLoginStatus";
 import InfiniteScroll from "react-infinite-scroll-component";
+import NewPost from "./NewPost";
 
 interface Props {}
 
@@ -259,6 +260,7 @@ const UserPage: React.FC<Props> = () => {
                 <div className="action-button">{friendshipStatus()}</div>
               </div>
             </div>
+            {person.id === user.id && <NewPost />}
             <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Posts</h2>
             {userFriends?.includes(person.id) ? (
               <InfiniteScroll

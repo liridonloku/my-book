@@ -55,7 +55,7 @@ const CommentBox: React.FC<Props> = ({ postId }) => {
   return (
     <StyledCommentBox>
       <div
-        className="image"
+        className="comment-box-image"
         onClick={() => {
           navigate(`/user/${user.id}`);
         }}

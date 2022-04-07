@@ -120,7 +120,7 @@ export const createNewAccount = async (
     let user = getAuth().currentUser;
     if (user) {
       await updateProfile(user, { displayName: `${firstName} ${lastName}` });
-      let name = user.displayName || "";
+      let name = `${firstName} ${lastName}`;
       let id = user.uid || "";
       let email = user.email || "";
       let photoUrl = user.photoURL || "";

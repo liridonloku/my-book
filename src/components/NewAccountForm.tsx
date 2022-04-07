@@ -40,7 +40,7 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
     try {
       const userCredential = await createNewAccount(Object(data), dispatch);
       if (userCredential) {
-        navigate("../", { replace: true });
+        navigate("/", { replace: true });
       }
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {

@@ -13,7 +13,7 @@ import profile from "../images/profile.jpg";
 import { logOutUser } from "../app/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../app/hooks";
 import { resetStateFriendRequests } from "../app/features/friendRequests/friendRequests";
 import { resetStateFriends } from "../app/features/friends/friends";
@@ -27,6 +27,7 @@ const Header: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [userMenu, setuserMenu] = useState(false);
 
@@ -97,7 +98,12 @@ const Header: React.FC<Props> = () => {
           </Link>
         </div>
         <div className="right">
-          <div className="user">
+          <div
+            className="user"
+            onClick={() => {
+              navigate(`/user/${user.id}`);
+            }}
+          >
             <div className="image">
               <img
                 referrerPolicy="no-referrer"
