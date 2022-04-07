@@ -6,15 +6,19 @@ import LeftSidebar from "./LeftSidebar";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import RightSidebar from "./RightSidebar";
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { PostData } from "../app/features/posts/posts";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { getAuth } from "firebase/auth";
+import { login } from "../app/features/user/user";
 
 interface Props {}
 
 const Home: React.FC<Props> = () => {
   const user = useAppSelector((state) => state.user);
   useLoginStatus(user);
+
+  const dispatch = useAppDispatch();
 
   const friends = useAppSelector((state) => state.friends.data);
   const posts = useAppSelector((state) => state.posts.data);
@@ -31,6 +35,19 @@ const Home: React.FC<Props> = () => {
       sethasMore(false);
     }
   }, [friends, posts, user.id]);
+
+  useEffect(() => {
+    if (!user.name) {
+      const newUser = getAuth().currentUser;
+      if (newUser) {
+        const name = newUser.displayName || "";
+        const email = newUser.email || "";
+        const id = newUser.uid;
+        const photoUrl = newUser.photoURL || "";
+        dispatch(login({ name, id, email, photoUrl }));
+      }
+    }
+  }, [dispatch, user.name]);
 
   const addMore = () => {
     //Filter unaccessible posts
