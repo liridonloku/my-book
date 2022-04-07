@@ -77,7 +77,8 @@ const Login: React.FC<Props> = () => {
           <div className="welcome">
             <h1 className="logo">MyBook</h1>
             <h2 className="statement">
-              Connect with friends and the world around you on MyBook.
+              Because 13557844 social networks aren't enough.{" "}
+              <span>(You didn't read that number, did you?)</span>
             </h2>
           </div>
           <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
@@ -166,9 +167,15 @@ const Login: React.FC<Props> = () => {
         </div>
       </div>
       <footer>
-        <a href="https://github.com/liridonloku" className="footer-text">
-          liridonloku, 2022
-        </a>
+        <p>
+          <a href="https://github.com/liridonloku" className="footer-text">
+            liridonloku, 2022
+          </a>
+        </p>
+        <p className="disclaimer">
+          Disclaimer: This app is made as an exercise and is not a real product.
+          Do not post sensitive personal information.
+        </p>
       </footer>
       {newAccountForm && (
         <NewAccountForm toggleNewAccountForm={toggleNewAccountForm} />

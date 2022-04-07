@@ -29,6 +29,11 @@ const StyledLogin = styled.div`
   .statement {
     max-width: 500px;
     min-width: 400px;
+
+    span {
+      font-size: small;
+      font-weight: normal;
+    }
   }
 
   .login-form {
@@ -112,13 +117,20 @@ const StyledLogin = styled.div`
 
   footer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
-  footer > a {
+  footer > p > a {
     text-decoration: none;
     font-size: 12px;
     color: #8a8d91;
+  }
+
+  .disclaimer {
+    margin-top: 15px;
+    text-align: center;
+    color: red;
   }
 
   @media (max-width: 900px) {
