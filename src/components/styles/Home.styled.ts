@@ -123,6 +123,35 @@ const StyledHome = styled.div`
         }
       }
     }
+
+    .loading-posts {
+      display: flex;
+      justify-content: center;
+
+      .lds-dual-ring {
+        display: inline-block;
+        width: 66px;
+        height: 66px;
+      }
+      .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 6px solid #65676b;
+        border-color: #65676b transparent #65676b transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
 
   @media (max-width: 480px) {
