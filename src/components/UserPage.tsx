@@ -28,6 +28,9 @@ import { ImageEdit } from "styled-icons/fluentui-system-regular";
 import { uploadPicture } from "../app/cloudinary";
 import { changePersonPhoto } from "../app/features/people/people";
 import { changePhotoUrl } from "../app/features/user/user";
+import { PostData } from "../app/features/posts/posts";
+import useLoginStatus from "../helpers/useLoginStatus";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {}
 
@@ -40,6 +43,8 @@ const UserPage: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.user);
+  useLoginStatus(user);
+
   const people = useAppSelector((state) => state.people.data);
   const posts = useAppSelector((state) => state.posts.data);
   const friendRequests = useAppSelector((state) => state.friendRequests);
@@ -48,6 +53,29 @@ const UserPage: React.FC<Props> = () => {
 
   const person = people.find((person) => person.id === id);
   const personPosts = posts.filter((post) => post.userId === person?.id);
+
+  const [relevantPosts, setrelevantPosts] = useState<PostData[]>([]);
+  const [hasMore, sethasMore] = useState(true);
+
+  useEffect(() => {
+    setrelevantPosts(
+      posts.filter((post) => post.userId === person?.id).slice(0, 5)
+    );
+  }, [posts, person?.id]);
+
+  const addMore = () => {
+    if (relevantPosts.length >= personPosts.length) {
+      sethasMore(false);
+      return;
+    }
+    const postsToAdd = personPosts.slice(
+      relevantPosts.length,
+      relevantPosts.length + 5
+    );
+    setTimeout(() => {
+      setrelevantPosts((previous) => previous.concat(postsToAdd));
+    }, 500);
+  };
 
   //Display sidebars based on screen width
   const [displayLeftSidebar, setdisplayLeftSidebar] = useState(
@@ -231,7 +259,25 @@ const UserPage: React.FC<Props> = () => {
             </div>
             <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Posts</h2>
             {userFriends?.includes(person.id) ? (
-              personPosts.map((post) => <Post key={post.postId} post={post} />)
+              <InfiniteScroll
+                dataLength={relevantPosts.length}
+                next={addMore}
+                hasMore={hasMore}
+                loader={
+                  <div className="loading-posts">
+                    <div className="lds-dual-ring"></div>
+                  </div>
+                }
+                endMessage={
+                  <p style={{ textAlign: "center" }}>
+                    You've reached the end...
+                  </p>
+                }
+              >
+                {relevantPosts.map((post) => (
+                  <Post key={post.postId} post={post} />
+                ))}
+              </InfiniteScroll>
             ) : (
               <p style={{ textAlign: "center" }}>
                 Add {person.name} as a friend to be able to see their posts.
