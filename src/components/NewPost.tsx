@@ -33,9 +33,7 @@ const NewPost: React.FC<Props> = () => {
         <div className="video-post">
           <Videocam size={24} color="red" />
           <p>Live Video</p>
-          <div className="not-available">
-            <CircleSlash size={16} color={"red"} />
-          </div>
+          <CircleSlash size={16} color={"red"} />
         </div>
         <div className="photo-post" onClick={toggleNewPostModal}>
           <Photo size={24} color="green" />
@@ -44,9 +42,7 @@ const NewPost: React.FC<Props> = () => {
         <div className="feeling-post">
           <EmojiEmotions size={24} color="orange" />
           <p>Feeling</p>
-          <div className="not-available" style={{ top: "-8px", right: "0px" }}>
-            <CircleSlash size={16} color={"red"} />
-          </div>
+          <CircleSlash size={16} color={"red"} />
         </div>
       </div>
       {newPostModal && <NewPostModal toggleNewPostModal={toggleNewPostModal} />}
