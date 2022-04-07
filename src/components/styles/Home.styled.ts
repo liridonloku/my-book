@@ -34,16 +34,17 @@ const StyledHome = styled.div`
           position: relative;
           padding: 0;
           border-radius: 50%;
-          width: 100px;
-          height: 100px;
+          //width: 100px;
+          //height: 100px;
           display: flex;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
 
           img {
             border-radius: 50%;
-            width: 100%;
-            height: 100%;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
           }
 
@@ -60,17 +61,7 @@ const StyledHome = styled.div`
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             width: max-content;
             cursor: pointer;
-            display: none;
             align-items: center;
-            position: absolute;
-            top: 0;
-            left: 80%;
-          }
-
-          :hover {
-            .change-image {
-              display: flex;
-            }
           }
         }
 

@@ -92,7 +92,7 @@ const addPersonToDB = async ({ id, name, email = "", photoUrl }: Person) => {
       name,
       email,
       photoUrl,
-      friendList: [],
+      friendList: [id],
     });
   } catch (error) {
     console.log(error);
