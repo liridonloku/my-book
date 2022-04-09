@@ -1,44 +1,91 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# About
 
-## Available Scripts
+**MyBook** is a social network inspired by Facebook.
 
-In the project directory, you can run:
+It has many features including: User accounts and profiles, friendships, posts with captions and images, likes, comments etc.
 
-### `npm start`
+The app is fully responsive on both mobile and desktop screens.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Built with
 
-### `npm test`
+This app is built using:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Front-end**: React, Redux, Typescript, Styled Components
+- **Back-end**: Firebase, Cloudinary
 
-### `npm run build`
+**Live Demo**: https://my-book-theta.vercel.app/
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Screenshots
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+<details>
+  <summary>Login Screen</summary>
+  <p>
+  
+  ![login-screen](https://res.cloudinary.com/dh72xea8l/image/upload/v1649509060/mybook/Screenshots/Login-screen-no-disclaimer_buzv4t.png)
+  </p>
+</details>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<details>
+  <summary>Home Screen</summary>
+  <p>
+  
+  ![home-screen](https://res.cloudinary.com/dh72xea8l/image/upload/v1649509061/mybook/Screenshots/Home-screen_vz5jll.png)
+  </p>
+</details>
 
-### `npm run eject`
+<details>
+  <summary>People Screen</summary>
+  <p>
+  
+  ![people-screen](https://res.cloudinary.com/dh72xea8l/image/upload/v1649509061/mybook/Screenshots/People-screen_o2rpfv.png)
+  </p>
+</details>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<details>
+  <summary>New Post</summary>
+  <p>
+  
+  ![new-post](https://res.cloudinary.com/dh72xea8l/image/upload/v1649509061/mybook/Screenshots/New-post_m4ho99.png)
+  </p>
+</details>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<details>
+  <summary>New Post (empty)</summary>
+  <p>
+  
+  ![new-post-empty](https://res.cloudinary.com/dh72xea8l/image/upload/v1649509061/mybook/Screenshots/New-post-empty_ep3pq1.png)
+  </p>
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<details>
+  <summary>User Page (Phone screen)</summary>
+  <p>
+  
+  ![new-post-empty](https://res.cloudinary.com/dh72xea8l/image/upload/v1649510478/mybook/Screenshots/User-page-mobile_z7psri.png)
+  </p>
+</details>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#
 
-## Learn More
+# Roadmap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Known issues
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Loading indicators for some async actions are missing.
+
+## Features for future versions
+
+- Notifications
+- Ability to see people that have liked a post.
+- Chat
+- Comment likes and replies
+
+# Contact
+
+Liridon Loku - liridonloku@gmail.com
+
+# Acknowledgements
+
+- [The Odin Project](https://theodinproject.com) - an amazing curriculum and community.
