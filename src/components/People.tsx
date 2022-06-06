@@ -8,8 +8,12 @@ import RightSidebar from "./RightSidebar";
 import PersonCard from "./PersonCard";
 import StyledHome from "./styles/Home.styled";
 import ConfirmFriendRemoval from "./ConfirmFriendRemoval";
-import { removeFromFriendsList } from "../app/firebase";
+import { removeFromFriendsList, getFriendRequests } from "../app/firebase";
 import { removeFriend as removeFriendFromState } from "../app/features/friends/friends";
+import {
+  populateSentRequests,
+  populateReceivedRequests,
+} from "../app/features/friendRequests/friendRequests";
 import { useAppDispatch } from "../app/hooks";
 
 interface Props {}
@@ -65,6 +69,22 @@ const People: React.FC<Props> = () => {
     return () => {
       window.removeEventListener("resize", resize);
     };
+  });
+
+  // Refresh friend requests
+  useEffect(() => {
+    const populateFriendRequests = async (userId: string) => {
+      const requests = await getFriendRequests();
+      const sentRequests = requests
+        .filter((request) => request.senderId === userId)
+        .map((request) => ({ ...request, date: request.date.toMillis() }));
+      const receivedRequests = requests
+        .filter((request) => request.receiverId === userId)
+        .map((request) => ({ ...request, date: request.date.toMillis() }));
+      dispatch(populateSentRequests(sentRequests));
+      dispatch(populateReceivedRequests(receivedRequests));
+    };
+    populateFriendRequests(user.id);
   });
 
   return (

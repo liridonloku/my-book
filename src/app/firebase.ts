@@ -87,21 +87,21 @@ interface Person {
 
 const addPersonToDB = async ({ id, name, email = "", photoUrl }: Person) => {
   try {
-    //Create person and add some starter friends :)
+    //Create person and add some starter friend requests :)
     await setDoc(doc(db, "people", id), {
       id,
       name,
       email,
       photoUrl,
-      friendList: [
-        id,
-        "2JnyQp1yapXtadfknLCL2riGF8F3",
-        "H3QzWwJLAyYijDctw16rX4JYSET2",
-        "OeGqVnQogZSvDTXmq6NEJHaJaz82",
-        "arm1SN7dfbe0joLfTfgVgQMt4sx1",
-        "wlFuNcijBad240uYt047DYVLxmg1",
-      ],
+      friendList: [id],
     });
+    await Promise.all([
+      sendFriendRequest("2JnyQp1yapXtadfknLCL2riGF8F3", id),
+      sendFriendRequest("H3QzWwJLAyYijDctw16rX4JYSET2", id),
+      sendFriendRequest("OeGqVnQogZSvDTXmq6NEJHaJaz82", id),
+      sendFriendRequest("arm1SN7dfbe0joLfTfgVgQMt4sx1", id),
+      sendFriendRequest("wlFuNcijBad240uYt047DYVLxmg1", id),
+    ]);
   } catch (error) {
     console.log(error);
   }
