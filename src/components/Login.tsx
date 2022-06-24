@@ -52,6 +52,16 @@ const Login: React.FC<Props> = () => {
     }
   };
 
+  const demoLogin = async () => {
+    try {
+      await logInWithEmail(
+        Object({ email: "email1@example.com", password: "123456" })
+      );
+    } catch (error: any) {
+      seterror(error.code);
+    }
+  };
+
   const [newAccountForm, setnewAccountForm] = useState(false);
   const [resetPasswordForm, setresetPasswordForm] = useState(false);
   const [informationBox, setinformationBox] = useState(false);
@@ -148,6 +158,13 @@ const Login: React.FC<Props> = () => {
               onClick={() => logInWithGoogle()}
             >
               Log In with Google
+            </button>
+            <button
+              type="button"
+              className="demo-login-button"
+              onClick={() => demoLogin()}
+            >
+              Demo Account
             </button>
             <div className="separator"></div>
             <button

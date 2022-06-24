@@ -94,6 +94,18 @@ const StyledLogin = styled.div`
     font-size: 20px;
     line-height: 48px;
     width: 300px;
+    margin-bottom: 15px;
+  }
+
+  .demo-login-button {
+    cursor: pointer;
+    color: #fff;
+    background-color: #ff0075;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 48px;
+    width: 300px;
     margin-bottom: 20px;
   }
 
