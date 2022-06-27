@@ -16,6 +16,7 @@ import {
   deletePost as deletePostInStore,
 } from "../app/features/posts/posts";
 import { useNavigate } from "react-router-dom";
+import LikesViewer from "./LikesViewer";
 
 interface Props {
   post: PostData;
@@ -27,6 +28,12 @@ const Post: React.FC<Props> = ({ post }) => {
   const person = people.find((person) => person.id === post.userId);
 
   const [postMenu, setpostMenu] = useState(false);
+
+  const [showLikes, setshowLikes] = useState(false);
+
+  const toggleShowLikes = () => {
+    setshowLikes((previous) => !previous);
+  };
 
   const [showComments, setshowComments] = useState(true);
   const [showAll, setshowAll] = useState(false);
@@ -127,7 +134,7 @@ const Post: React.FC<Props> = ({ post }) => {
         </div>
       )}
       <div className="stats">
-        <div className="likes">
+        <div className="likes" onClick={() => toggleShowLikes()}>
           <p className="like-icon" data-testid="like-icon">
             <ThumbUp size={12} color="white" />
           </p>
@@ -165,6 +172,7 @@ const Post: React.FC<Props> = ({ post }) => {
         showComments={showComments}
         showAll={showAll}
       />
+      {showLikes && <LikesViewer post={post} close={toggleShowLikes} />}
       {post.comments.length > 3 && !showAll && (
         <p className="show-all-comments" onClick={toggleShowAllComments}>
           Show all comments

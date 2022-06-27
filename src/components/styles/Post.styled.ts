@@ -126,7 +126,11 @@ const StyledPost = styled.div`
       display: flex;
       gap: 10px;
       align-items: center;
-      cursor: default;
+      cursor: pointer;
+
+      :hover {
+        text-decoration: underline;
+      }
 
       .like-icon {
         padding: 3px;
