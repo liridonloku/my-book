@@ -63,7 +63,7 @@ const StyledLikesViewer = styled.div`
       flex-grow: 0;
       padding: 10px;
       margin-bottom: 15px;
-      overflow: scroll;
+      overflow-y: scroll;
     }
   }
 `;
