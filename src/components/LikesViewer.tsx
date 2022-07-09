@@ -13,6 +13,8 @@ import {
   populateSentRequests,
 } from "../app/features/friendRequests/friendRequests";
 import ConfirmFriendRemoval from "./ConfirmFriendRemoval";
+import { motion } from "framer-motion";
+import { dropIn } from "./NewPostModal";
 
 interface Props {
   close: Function;
@@ -76,7 +78,13 @@ const LikesViewer: React.FC<Props> = ({ post, close }) => {
   return (
     <>
       <StyledLikesViewer>
-        <div className="modal">
+        <motion.div
+          className="modal"
+          variants={dropIn}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           <div className="top-part">
             <div className="likes">
               <p className="like-icon" data-testid="like-icon">
@@ -91,7 +99,7 @@ const LikesViewer: React.FC<Props> = ({ post, close }) => {
           <div className="content">
             {renderPeopleFromLikes(peopleFromLikes)}
           </div>
-        </div>
+        </motion.div>
       </StyledLikesViewer>
       {friendRemoveModal && (
         <ConfirmFriendRemoval

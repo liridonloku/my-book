@@ -17,6 +17,7 @@ import {
 } from "../app/features/posts/posts";
 import { useNavigate } from "react-router-dom";
 import LikesViewer from "./LikesViewer";
+import { AnimatePresence } from "framer-motion";
 
 interface Props {
   post: PostData;
@@ -172,7 +173,9 @@ const Post: React.FC<Props> = ({ post }) => {
         showComments={showComments}
         showAll={showAll}
       />
-      {showLikes && <LikesViewer post={post} close={toggleShowLikes} />}
+      <AnimatePresence>
+        {showLikes && <LikesViewer post={post} close={toggleShowLikes} />}
+      </AnimatePresence>
       {post.comments.length > 3 && !showAll && (
         <p className="show-all-comments" onClick={toggleShowAllComments}>
           Show all comments
