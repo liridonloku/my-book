@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useLoginStatus from "../helpers/useLoginStatus";
 import ResetPasswordForm from "./ResetPasswordForm";
+import LoadingAnimation from "./LoadingAnimation";
 
 interface Props {}
 
@@ -32,7 +33,11 @@ const Login: React.FC<Props> = () => {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
+      setClicked("login");
+      setIsLoading(true);
       await logInWithEmail(Object(data));
+      setIsLoading(false);
+      setClicked("none");
     } catch (error: any) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -54,9 +59,13 @@ const Login: React.FC<Props> = () => {
 
   const demoLogin = async () => {
     try {
+      setClicked("demo");
+      setIsLoading(true);
       await logInWithEmail(
         Object({ email: "email1@example.com", password: "123456" })
       );
+      setIsLoading(false);
+      setClicked("none");
     } catch (error: any) {
       seterror(error.code);
     }
@@ -65,6 +74,8 @@ const Login: React.FC<Props> = () => {
   const [newAccountForm, setnewAccountForm] = useState(false);
   const [resetPasswordForm, setresetPasswordForm] = useState(false);
   const [informationBox, setinformationBox] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [clicked, setClicked] = useState("none");
 
   const [error, seterror] = useState("");
 
@@ -146,25 +157,38 @@ const Login: React.FC<Props> = () => {
                 e.preventDefault();
                 toggleResetPasswordForm();
               }}
+              disabled={isLoading}
             >
               Reset password
             </button>
-            <button type="submit" className="login-button">
-              Log In
+            <button type="submit" className="login-button" disabled={isLoading}>
+              {clicked === "login" ? <LoadingAnimation /> : "Log In"}
             </button>
             <button
               type="button"
               className="google-login-button"
-              onClick={() => logInWithGoogle()}
+              onClick={async () => {
+                setClicked("google");
+                setIsLoading(true);
+                logInWithGoogle();
+                setIsLoading(false);
+                setClicked("none");
+              }}
+              disabled={isLoading}
             >
-              Log In with Google
+              {clicked === "google" ? (
+                <LoadingAnimation />
+              ) : (
+                "Log In with Google"
+              )}
             </button>
             <button
               type="button"
               className="demo-login-button"
               onClick={() => demoLogin()}
+              disabled={isLoading}
             >
-              Demo Account
+              {clicked === "demo" ? <LoadingAnimation /> : "Demo Account"}
             </button>
             <div className="separator"></div>
             <button
@@ -174,6 +198,7 @@ const Login: React.FC<Props> = () => {
                 e.preventDefault();
                 toggleNewAccountForm();
               }}
+              disabled={isLoading}
             >
               Create new Account
             </button>
