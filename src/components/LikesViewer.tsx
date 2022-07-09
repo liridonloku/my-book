@@ -68,6 +68,7 @@ const LikesViewer: React.FC<Props> = ({ post, close }) => {
         person={person}
         toggleModal={toggleModal}
         setFriendId={setFriendId}
+        displayButton={false}
       />
     ));
   };

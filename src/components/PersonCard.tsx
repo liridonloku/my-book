@@ -23,9 +23,15 @@ interface Props {
   person: Data;
   toggleModal: Function;
   setFriendId: Function;
+  displayButton?: boolean;
 }
 
-const PersonCard: React.FC<Props> = ({ person, toggleModal, setFriendId }) => {
+const PersonCard: React.FC<Props> = ({
+  person,
+  toggleModal,
+  setFriendId,
+  displayButton = true,
+}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -121,7 +127,9 @@ const PersonCard: React.FC<Props> = ({ person, toggleModal, setFriendId }) => {
             {person.name}
           </span>
         </div>
-        <div className="action-button">{friendshipStatus()}</div>
+        {displayButton && (
+          <div className="action-button">{friendshipStatus()}</div>
+        )}
       </div>
     </StyledPersonCard>
   );
