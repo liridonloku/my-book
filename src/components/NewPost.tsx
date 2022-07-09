@@ -7,6 +7,7 @@ import { RootState } from "../app/store";
 import NewPostModal from "./NewPostModal";
 import { CircleSlash } from "styled-icons/octicons";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 interface Props {}
 
@@ -53,7 +54,15 @@ const NewPost: React.FC<Props> = () => {
           <CircleSlash size={16} color={"red"} />
         </div>
       </div>
-      {newPostModal && <NewPostModal toggleNewPostModal={toggleNewPostModal} />}
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+        onExitComplete={() => null}
+      >
+        {newPostModal && (
+          <NewPostModal toggleNewPostModal={toggleNewPostModal} />
+        )}
+      </AnimatePresence>
     </StyledNewPost>
   );
 };

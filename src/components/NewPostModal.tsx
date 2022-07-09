@@ -9,10 +9,32 @@ import LoadingAnimation from "./LoadingAnimation";
 import { addNewPostToDB } from "../app/firebase";
 import { Timestamp } from "firebase/firestore";
 import { addNewPost } from "../app/features/posts/posts";
+import { motion } from "framer-motion";
 
 interface Props {
   toggleNewPostModal: Function;
 }
+
+const dropIn = {
+  hidden: {
+    y: "-100vh",
+    opacity: 0,
+  },
+  visible: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: "100vh",
+    opacity: 0,
+  },
+};
 
 const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
   const user = useAppSelector((state) => state.user);
@@ -89,7 +111,13 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
 
   return (
     <StyledNewPostModal>
-      <div className="modal">
+      <motion.div
+        className="modal"
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div className="top-part">
           <h3 className="title">Create post</h3>
           <div className="close-button" onClick={() => toggleNewPostModal()}>
@@ -144,7 +172,7 @@ const NewPostModal: React.FC<Props> = ({ toggleNewPostModal }) => {
             {isLoading ? <LoadingAnimation /> : "Post"}
           </button>
         </div>
-      </div>
+      </motion.div>
     </StyledNewPostModal>
   );
 };
