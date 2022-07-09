@@ -6,6 +6,9 @@ import { createNewAccount } from "../app/firebase";
 import { X } from "styled-icons/bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { dropIn } from "./NewPostModal";
+import LoadingAnimation from "./LoadingAnimation";
 
 interface Props {
   toggleNewAccountForm: Function;
@@ -25,6 +28,7 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
   let dispatch = useDispatch();
 
   const [error, seterror] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const {
     register,
@@ -37,12 +41,14 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
     criteriaMode: "all",
   });
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    setisLoading(true);
     try {
       const userCredential = await createNewAccount(Object(data), dispatch);
       if (userCredential) {
         navigate("/", { replace: true });
       }
     } catch (error: any) {
+      setisLoading(false);
       if (error.code === "auth/email-already-in-use") {
         seterror(
           "This email is already linked to an account. Please use another email."
@@ -60,7 +66,13 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
 
   return (
     <StyledNewAccountForm>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <motion.form
+        onSubmit={handleSubmit(onSubmit)}
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div className="top">
           <h3 className="title">Sign Up</h3>
           <div
@@ -220,9 +232,11 @@ const NewAccountForm: React.FC<Props> = ({ toggleNewAccountForm }) => {
           />
         </div>
         <div className="sign-up">
-          <button type="submit">Sign Up</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? <LoadingAnimation /> : "Sign Up"}
+          </button>
         </div>
-      </form>
+      </motion.form>
     </StyledNewAccountForm>
   );
 };
