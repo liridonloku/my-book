@@ -32,6 +32,7 @@ import { PostData } from "../app/features/posts/posts";
 import useLoginStatus from "../helpers/useLoginStatus";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NewPost from "./NewPost";
+import { AnimatePresence } from "framer-motion";
 
 interface Props {}
 
@@ -294,14 +295,16 @@ const UserPage: React.FC<Props> = () => {
           {displayRightSidebar && <div className="right"></div>}
         </StyledHome>
       )}
-      {friendRemoveModal && (
-        <ConfirmFriendRemoval
-          id={idOfFriendToRemove}
-          toggleModal={toggleModal}
-          setFriendId={setFriendId}
-          removeFriend={removeFriend}
-        />
-      )}
+      <AnimatePresence>
+        {friendRemoveModal && (
+          <ConfirmFriendRemoval
+            id={idOfFriendToRemove}
+            toggleModal={toggleModal}
+            setFriendId={setFriendId}
+            removeFriend={removeFriend}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

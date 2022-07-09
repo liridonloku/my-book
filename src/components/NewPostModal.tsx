@@ -15,7 +15,7 @@ interface Props {
   toggleNewPostModal: Function;
 }
 
-const dropIn = {
+export const dropIn = {
   hidden: {
     y: "-100vh",
     opacity: 0,

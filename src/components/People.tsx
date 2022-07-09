@@ -15,6 +15,7 @@ import {
   populateReceivedRequests,
 } from "../app/features/friendRequests/friendRequests";
 import { useAppDispatch } from "../app/hooks";
+import { AnimatePresence } from "framer-motion";
 
 interface Props {}
 
@@ -112,14 +113,16 @@ const People: React.FC<Props> = () => {
           </div>
         )}
       </StyledHome>
-      {friendRemoveModal && (
-        <ConfirmFriendRemoval
-          id={idOfFriendToRemove}
-          toggleModal={toggleModal}
-          setFriendId={setFriendId}
-          removeFriend={removeFriend}
-        />
-      )}
+      <AnimatePresence>
+        {friendRemoveModal && (
+          <ConfirmFriendRemoval
+            id={idOfFriendToRemove}
+            toggleModal={toggleModal}
+            setFriendId={setFriendId}
+            removeFriend={removeFriend}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

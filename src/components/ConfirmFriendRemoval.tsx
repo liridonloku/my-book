@@ -2,6 +2,8 @@ import React from "react";
 import StyledNewAccountForm from "./styles/NewAccountForm.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
+import { motion } from "framer-motion";
+import { dropIn } from "./NewPostModal";
 
 interface Props {
   id: string;
@@ -22,11 +24,15 @@ const ConfirmFriendRemoval: React.FC<Props> = ({
   return (
     <StyledNewAccountForm>
       {person && (
-        <form
+        <motion.form
           onSubmit={(e) => {
             e.preventDefault();
             removeFriend(id);
           }}
+          variants={dropIn}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
           <div className="top">
             <h3 className="title">Are you sure?</h3>
@@ -53,10 +59,10 @@ const ConfirmFriendRemoval: React.FC<Props> = ({
               Cancel
             </button>
           </div>
-        </form>
+        </motion.form>
       )}
       {!person && (
-        <form
+        <motion.form
           onSubmit={(e) => {
             e.preventDefault();
           }}
@@ -73,7 +79,7 @@ const ConfirmFriendRemoval: React.FC<Props> = ({
           <div className="confirm">
             <button type="submit">Ok</button>
           </div>
-        </form>
+        </motion.form>
       )}
     </StyledNewAccountForm>
   );
