@@ -36,9 +36,9 @@ const Login: React.FC<Props> = () => {
       setClicked("login");
       setIsLoading(true);
       await logInWithEmail(Object(data));
+    } catch (error: any) {
       setIsLoading(false);
       setClicked("none");
-    } catch (error: any) {
       switch (error.code) {
         case "auth/wrong-password":
           seterror("Wrong password");
@@ -64,9 +64,9 @@ const Login: React.FC<Props> = () => {
       await logInWithEmail(
         Object({ email: "email1@example.com", password: "123456" })
       );
+    } catch (error: any) {
       setIsLoading(false);
       setClicked("none");
-    } catch (error: any) {
       seterror(error.code);
     }
   };
@@ -168,11 +168,15 @@ const Login: React.FC<Props> = () => {
               type="button"
               className="google-login-button"
               onClick={async () => {
-                setClicked("google");
-                setIsLoading(true);
-                logInWithGoogle();
-                setIsLoading(false);
-                setClicked("none");
+                try {
+                  setClicked("google");
+                  setIsLoading(true);
+                  logInWithGoogle();
+                } catch (error) {
+                  setIsLoading(false);
+                  setClicked("none");
+                  seterror("Error ocurred. Please try again later.");
+                }
               }}
               disabled={isLoading}
             >
