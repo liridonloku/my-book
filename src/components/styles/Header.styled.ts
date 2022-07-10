@@ -18,6 +18,10 @@ const StyledHeader = styled.header`
   .left {
     display: flex;
 
+    a {
+      text-decoration: none;
+    }
+
     .icon {
       display: flex;
       cursor: pointer;

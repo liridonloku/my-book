@@ -48,11 +48,13 @@ const Header: React.FC<Props> = () => {
     <StyledHeader>
       <div className="container">
         <div className="left">
-          <div className="icon">
-            <h2>M</h2>
-          </div>
+          <Link to={"/"}>
+            <div className="icon">
+              <h2>M</h2>
+            </div>
+          </Link>
           <div className="search-bar">
-            <input type="text" placeholder="Search MyBook" />
+            <input type="text" placeholder="Search MyBook" disabled />
           </div>
         </div>
         <div className="middle">
